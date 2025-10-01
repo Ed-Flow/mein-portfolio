@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El Arvida – Verpflegungsautomaten</title>
+
+  <!-- Lesbare Webfont -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Basis */
+    :root{
+      --brown:#6b4637;
+      --brown-2:#533528;
+      --beige:#f5f0e6;
+      --beige-2:#f6f0e9;
+      --card:#fdfaf6;
+      --text:#222;
+      --text-strong:#111;
+      --border:#e6ddd0;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.65;
+      background:var(--beige);
+      color:var(--text);
+    }
+
+    /* Header */
+    /* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6d3b2c; /* dunkleres Braun */
+  padding: 12px 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo + Text */
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .logo img {
+  height: 40px;   /* gleichmäßig skalieren */
+  width: auto;
+  border-radius: 6px;
+}
+
+header .logo span {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Navigation */
+
+
+
+    /* Willkommen & Hero Boxen angleichen */
+.welcome-card,
+.hero-inner {
+  max-width: 1000px;
+  text-align: center;
+  margin: 36px auto;
+  padding: 32px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+/* Hero Abschnitt zentriert */
+.hero {
+  text-align: center;
+  background: var(--beige-2);
+  padding: 20px 16px; /* weniger padding außen, Box übernimmt das */
+}
+/* Einheitliche Überschriften */
+.hero h1,
+.welcome-card h2 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--text-strong);
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(32px, 4vw, 42px);
+  line-height: 1.2;
+  font-weight: 900;
+  color: var(--text-strong);
+}
+.hero .lead {
+  margin: 0 0 22px;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text);
+}
+
+    .hero h1{
+      margin:0 0 12px;
+      font-size:clamp(32px,4vw,48px);
+      line-height:1.15;
+      font-weight:900;
+      color:var(--text-strong);
+    }
+    .hero .lead{
+      margin:0 0 22px;
+      font-size:clamp(16px,2.2vw,20px);
+      color:var(--text);
+    }
+    .btn{
+      display:inline-block; padding:12px 20px; border-radius:8px;
+      background:var(--brown); color:#fff; text-decoration:none; font-weight:800;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      transition:filter .12s ease, transform .06s ease;
+    }
+    .btn:hover{filter:brightness(1.07); transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+
+    /* Leistungen */
+    .services{
+      padding:56px 16px;
+      background:#f3eadf;
+      border-top:1px solid #e3d8c9;
+      border-bottom:1px solid #e3d8c9;
+    }
+    .services .wrap{max-width:1100px; margin:0 auto}
+    .services h2{margin:0 0 8px; color:var(--text-strong); font-weight:900}
+    .services .sub{margin:0 0 24px; color:#5a4a44}
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap:18px;
+    }
+    .card{
+      background:#fff;
+      border:1px solid #e9e2d6;
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 2px 6px rgba(0,0,0,.04);
+    }
+    .card h3{margin:0 0 10px; color:#4b362f; font-weight:900}
+    .card ul{margin:0 0 14px 18px; padding:0}
+    .card li{margin:6px 0; line-height:1.55}
+
+    .btn-ghost{
+      background:#fff; color:var(--brown); border:2px solid var(--brown);
+      border-radius:8px; padding:10px 14px; font-weight:800; text-decoration:none; display:inline-block;
+    }
+    .btn-ghost:hover{background:var(--brown); color:#fff}
+
+    /* Kontakt */
+    .contact{padding:56px 16px; background:#fff}
+    .contact .wrap{max-width:700px; margin:0 auto}
+    .contact h2{margin:0 0 8px; color:var(--text-strong); font-weight:900}
+    .contact .sub{margin:0 0 24px; color:#5a4a44}
+    .form label{display:block; margin-bottom:14px; font-weight:700; color:#4b362f}
+    .form input, .form textarea, .form select{
+      width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; font:inherit; margin-top:4px;
+    }
+    .form button{margin-top:12px; cursor:pointer}
+
+    /* Footer */
+    footer{
+      text-align:center; padding:20px; background:#eeeeee; margin-top:40px; font-size:.9rem
+    }
+
+    /* kleine Helfer */
+    .mt-24{margin-top:24px}
+
+    :root{
+  --brown:#6b4637;
+  --brown-deep:#533528;
+  --header-h:64px;
+}
+
+/* Layout-Container */
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+
+/* Premium Header */
+.site-header{
+  position: sticky; top:0; z-index:1000;
+  background: color-mix(in oklab, var(--brown) 90%, #0000);
+  backdrop-filter: saturate(140%) blur(6px);
+  -webkit-backdrop-filter: saturate(140%) blur(6px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  height: var(--header-h);
+}
+.header-inner{
+  height: var(--header-h);
+  display:flex; align-items:center; justify-content:space-between;
+}
+
+/* Brand */
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+.logo{height:36px; width:auto; border-radius:6px}
+.brand span{color:#fff; font-weight:800; letter-spacing:.2px}
+
+/* Nav (Desktop) */
+.primary-nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:1.3rem;
+  letter-spacing:0.3px;
+  padding:10px 14px;
+  border-radius:8px;
+  position:relative;           /* für die Linie */
+  transition: background .2s ease, color .2s ease, transform .05s ease;
+}
+
+/* Linie animiert, ohne das Layout zu verändern */
+.primary-nav a::after{
+  content:"";
+  position:absolute;
+  left:12px;                   /* passt zum horizontalen Padding */
+  right:12px;
+  bottom:6px;                  /* Abstand zur Schrift */
+  height:2px;
+  background:#ffe6cc;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .2s ease;
+  opacity:.9;
+}
+
+.primary-nav a:hover{
+  background: rgba(255,255,255,.12);
+}
+
+.primary-nav a:hover::after{
+  transform:scaleX(1);
+}
+
+
+
+
+
+/* Burger Button (nur mobil sichtbar) */
+.nav-toggle{
+  display:none; width:40px; height:40px; border:0; background:transparent; cursor:pointer;
+}
+.nav-toggle span{
+  display:block; height:2px; width:24px; margin:6px auto; background:#fff; border-radius:2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* Mobile */
+@media (max-width: 900px){
+  .nav-toggle{display:block}
+  .primary-nav{
+    position:absolute; right:16px; top: calc(var(--header-h) - 6px);
+    display:flex; flex-direction:column; align-items:flex-start; gap:8px;
+    background: color-mix(in oklab, var(--brown) 92%, #0000);
+    backdrop-filter: saturate(140%) blur(6px);
+    border:1px solid rgba(0,0,0,.1); border-radius:12px;
+    padding:10px; min-width: 200px;
+    box-shadow: 0 12px 24px rgba(0,0,0,.15);
+    max-height: 0; overflow:hidden;
+    transition: max-height .25s ease;
+  }
+  .site-header.open .primary-nav{ max-height: 320px }
+  /* Burger X */
+  .site-header.open .nav-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg) }
+  .site-header.open .nav-toggle span:nth-child(2){ opacity:0 }
+  .site-header.open .nav-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg) }
+}
+
+/* Angenehmes Anker-Scrollen unter Sticky-Header */
+html{ scroll-behavior: smooth }
+:root{ scroll-padding-top: var(--header-h) }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+  <div class="container header-inner">
+    <a href="#start" class="brand">
+      
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="primary-nav" class="primary-nav">
+      <a href="#start">Startseite</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#shop">Shop</a>
+      <a href="#kontakt">Kontakt</a>
+
+    </nav>
+  </div>
+</header>
+
+
+
+  <!-- Willkommen (jetzt zuerst) -->
+  <section id="start" class="welcome-card">
+    <h2>Willkommen bei El Arvida</h2>
+    <p>Wir bieten professionelle Kaffee- und Snackautomaten für Firmen, Schulen und Vereine.</p>
+    <p>Unsere Leistungen: Vermietung, Verkauf und Wartung – alles aus einer Hand.</p>
+  </section>
+
+  <!-- Hero darunter -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Verpflegungs­automaten für Firmen, Schulen & Vereine</h1>
+      <p class="lead">Beratung, Vermietung, Verkauf und Wartung – alles aus einer Hand.</p>
+      <a class="btn" href="#kontakt">Unverbindlich anfragen</a>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen" class="services">
+    <div class="wrap">
+      <h2>Leistungen für Geschäftskunden</h2>
+      <p class="sub">Flexible Betriebskonzepte – passend zu Standort, Volumen und Personalressourcen.</p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Volloperating</h3>
+          <ul>
+            <li>El-Arvida übernimmt Befüllung, Reinigung, Wartung, Abrechnung.</li>
+            <li>Keine Fixkosten am Standort; Umsatzbeteiligung oder Miete.</li>
+            <li>Ideal bei hohem Durchlauf (Produktion, Schulen, Kliniken).</li>
+          </ul>
+          <a class="btn-ghost" href="#kontakt">Unverbindlich anfragen</a>
+        </article>
+
+        <article class="card">
+          <h3>Teil-/Teamoperating</h3>
+          <ul>
+            <li>Standort übernimmt Befüllung; El-Arvida liefert Ware & Technik.</li>
+            <li>Regelmäßige Wartung, Störungsdienst & Nachschulung inklusive.</li>
+            <li>Ideal, wenn internes Team vorhanden ist.</li>
+          </ul>
+          <a class="btn-ghost" href="#kontakt">Angebot erhalten</a>
+        </article>
+
+        <article class="card">
+          <h3>Full Service (Eigengeräte)</h3>
+          <ul>
+            <li>Wartungsvertrag für vorhandene Automaten aller gängigen Marken.</li>
+            <li>Reinigungspakete, Ersatzteile, 24/7-Störungsannahme.</li>
+            <li>Optional: Produktlieferungen und Qualitätskontrollen.</li>
+          </ul>
+          <a class="btn-ghost" href="#kontakt">Service anfragen</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt" class="contact">
+    <div class="wrap">
+      <h2>Kontakt aufnehmen</h2>
+      <p class="sub">Wir beraten Sie gerne zu den passenden Automatenlösungen.</p>
+
+      <!-- action später durch Formspree-URL ersetzen -->
+      <form action="#" method="POST" class="form">
+        <label>Firma* <input type="text" name="firma" required></label>
+        <label>Ansprechpartner* <input type="text" name="name" required></label>
+        <label>Telefon* <input type="tel" name="telefon" required></label>
+        <label>E-Mail* <input type="email" name="email" required></label>
+        <label>Mitarbeiterzahl <input type="number" name="mitarbeiter" min="1"></label>
+        <label>Gewünschtes Modell
+          <select name="modell">
+            <option value="Volloperating">Volloperating</option>
+            <option value="Teiloperating">Teil-/Teamoperating</option>
+            <option value="FullService">Full Service</option>
+          </select>
+        </label>
+        <label>Nachricht <textarea name="message" rows="4"></textarea></label>
+        <button type="submit" class="btn mt-24">Anfrage senden</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 El Arvida – Alle Rechte vorbehalten ·
+    <a href="impressum.html">Impressum</a> ·
+    <a href="datenschutz.html">Datenschutz</a>
+  </footer>
+
+  <script>
+    // sanftes Scrollen
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+  </script>
+
+  <script>
+  const header = document.querySelector('.site-header');
+  const btn = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('primary-nav');
+
+  if(btn){
+    btn.addEventListener('click', () => {
+      const open = header.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Menü schließen, wenn ein Link geklickt wird (mobil)
+    nav?.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=> header.classList.remove('open'));
+    });
+  }
+</script>
+
+</body>
+</html>
