@@ -171,6 +171,19 @@
     /* REVEAL */
     .reveal{opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease}
     .reveal.is-in{opacity:1; transform:none}
+
+    /* Handy-Anpassung: Logo kleiner und zentriert */
+@media (max-width: 720px) {
+  .logo-rail {
+    justify-content: center;    /* zentriert auf Handy */
+  }
+  .logo-rail img {
+    transform: scale(1);        /* normale Größe */
+    margin-left: 0;             /* kein negatives Verschieben */
+    max-width: 90%;             /* passt gut auf den Bildschirm */
+  }
+}
+
   </style>
 </head>
 <body>
