@@ -25,55 +25,77 @@
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth; scroll-padding-top:var(--header-h)}
+    html, body{max-width:100%; overflow-x:hidden;}
     body{
       margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.65; color:var(--text);
       background:
         radial-gradient(1400px 900px at 80% -200px, rgba(255,230,204,.35), transparent 60%),
         radial-gradient(1000px 700px at -10% 40%, rgba(255,255,255,.35), transparent 55%),
         linear-gradient(180deg, #f9f6f1 0%, #f1e8df 100%);
-      min-height:100dvh; position:relative;
-    }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none;
-      background:
-        radial-gradient(1200px 800px at 50% -200px, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(900px 650px at 10% 60%, rgba(255,230,204,.16), transparent 55%),
-        radial-gradient(circle at center, transparent 72%, rgba(0,0,0,.05));
+      min-height:100dvh;
     }
 
-    .container{max-width:var(--maxw); margin:0 auto; padding:0 18px}
-
-    /* HEADER: zentrierte Navigation, kein Logo */
-    .site-header{
-      position:sticky; top:0; z-index:1000;
+    /* HEADER */
+    .site-header {
+      position: sticky; top: 0; z-index: 1000; width:100%;
       background:
         linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
-        linear-gradient(0deg, color-mix(in oklab, var(--brown) 92%, #0000), var(--brown-deep));
-      backdrop-filter:saturate(140%) blur(8px);
-      -webkit-backdrop-filter:saturate(140%) blur(8px);
-      border-bottom:1px solid rgba(255,255,255,.14);
-      box-shadow:0 10px 30px rgba(0,0,0,.1);
+        linear-gradient(0deg, color-mix(in oklab, var(--brown) 92%, transparent), var(--brown-deep));
+      backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 10px 30px rgba(0,0,0,.1);
+      padding-top: env(safe-area-inset-top, 0px);
     }
-    .header-inner{min-height:var(--header-h); display:flex; align-items:center; justify-content:center; padding:12px 0}
-    .primary-nav{display:flex; gap:32px; align-items:center; justify-content:center}
+    .header-bar{ display:flex; align-items:center; justify-content:center; min-height:var(--header-h); position:relative; padding:0 16px; }
+    .primary-nav{ display:flex; gap:32px; align-items:center; justify-content:center; }
     .primary-nav a{
-      color:#fff; text-decoration:none; font-weight:800; font-size:1.1rem; letter-spacing:.3px;
+      color:#fff; text-decoration:none; font-weight:800; font-size:1.1rem;
       padding:10px 14px; border-radius:10px; position:relative; transition:background .2s ease, opacity .2s ease; opacity:.95;
     }
-    .primary-nav a:hover{background:rgba(255,255,255,.10); opacity:1}
+    .primary-nav a:hover{background:rgba(255,255,255,.10); opacity:1;}
+    .primary-nav a.is-active{background:rgba(255,255,255,.14);}
     .primary-nav a::after{
       content:""; position:absolute; left:14px; right:14px; bottom:6px; height:2px; background:var(--accent);
       transform:scaleX(0); transform-origin:left; transition:transform .22s ease;
     }
-    .primary-nav a:hover::after{transform:scaleX(1)}
-    .primary-nav a.is-active{background:rgba(255,255,255,.14)}
-    .primary-nav a.is-active::after{transform:scaleX(1)}
+    .primary-nav a:hover::after,.primary-nav a.is-active::after{transform:scaleX(1);}
 
-    /* INTRO: Logo links ohne Karte, zwei Karten rechts */
-    .intro{padding:34px 16px 22px}
+    .nav-toggle{display:none; width:42px; height:42px; border:0; background:transparent; cursor:pointer;}
+    .nav-toggle span{display:block; width:24px; height:2px; margin:6px auto; background:#fff; border-radius:2px; transition:transform .2s ease, opacity .2s ease;}
+
+    .mobile-nav{display:none;}
+
+    @media (max-width:768px){
+      .header-bar{min-height:56px; justify-content:space-between;}
+      .primary-nav{display:none;}
+      .nav-toggle{display:block;}
+      .site-header.open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+      .site-header.open .nav-toggle span:nth-child(2){opacity:0;}
+      .site-header.open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+      .mobile-nav{
+        display:grid; grid-template-columns:1fr; gap:10px;
+        padding:12px 16px 16px;
+        background: color-mix(in oklab, var(--brown) 96%, black 0%);
+        border-bottom: 1px solid rgba(255,255,255,.14);
+        width:100%;
+        margin:0;
+      }
+      .site-header:not(.open) .mobile-nav{display:none;}
+      .mobile-nav a{
+        display:block; text-align:center; color:#fff; text-decoration:none; font-weight:800;
+        padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
+        transition:background .15s ease;
+      }
+      .mobile-nav a:hover{background:rgba(255,255,255,.18);}
+      .nav-toggle{position:static; margin:0;}
+    }
+
+    /* INTRO */
+    .intro{padding:34px 16px 22px;}
     .intro-grid{
       max-width:1100px; margin:0 auto; display:grid; gap:22px; align-items:stretch;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns:360px 1fr;
     }
     .logo-rail{
       display:flex; align-items:center; justify-content:flex-start;
@@ -81,146 +103,213 @@
     }
     .logo-rail img{
       display:block; width:100%; height:auto; object-fit:contain;
-      transform-origin:center left;
+      transform:scale(1.6); transform-origin:center left; margin-left:-150px;
     }
-    .logo-rail img {
-  display: block;
-  width: 100%;         /* nutzt volle Spaltenbreite */
-  height: auto;
-  object-fit: contain;
-  transform: scale(1.6);     /* Vergrößert das Logo – 1.3 = 130% */
-  transform-origin: center left; /* bleibt links verankert */
-  margin-left: -180px; /* schiebt das Logo nach links */
+    @media(max-width:768px){
+      .intro{ padding:18px 16px 0; }                /* gibt der Intro die gleichen Seitenkanten wie .wrap */
+      .intro-grid{grid-template-columns:1fr; gap:14px; max-width:100%;}
+      .logo-rail{justify-content:center;}
+      .logo-rail img{transform:none; margin:0 auto; max-width:100%;}
+    }
 
-}
-
-    @media(max-width:980px){ .intro-grid{grid-template-columns:300px 1fr} }
-    @media(max-width:720px){ .intro-grid{grid-template-columns:1fr} .logo-rail{justify-content:center} .logo-rail img{max-width:420px} }
-
-    /* Karten, Headlines, Buttons */
-    .stack{display:flex; flex-direction:column; gap:22px}
-    .card{background:#fff; border:var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px 24px}
-    .welcome-card h2{margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong)}
-    .hero h1{margin:0 0 12px; font-size:clamp(34px,4vw,46px); font-weight:900; color:var(--text-strong)}
-    .lead{margin:0 0 24px; font-size:clamp(16px,2.1vw,20px); color:#333}
+    /* GENERELLE KARTEN UND BUTTONS */
+    .stack{display:flex; flex-direction:column; gap:22px;}
+    .card{
+      background:#fff; border:var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px 24px;
+      width:100%; max-width:100%; margin:0;                  /* verhindert Überbreite überall */
+    }
+    .welcome-card h2{margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong);}
+    .hero h1{margin:0 0 12px; font-size:clamp(34px,4vw,46px); font-weight:900; color:var(--text-strong);}
+    .lead{margin:0 0 24px; font-size:clamp(16px,2.1vw,20px); color:#333;}
     .btn{
-      display:inline-block; padding:12px 20px; border-radius:10px; background:var(--brown); color:#fff; text-decoration:none; font-weight:900;
-      box-shadow:0 6px 14px rgba(0,0,0,.16); transition:filter .12s ease, transform .06s ease;
+      display:inline-block; padding:12px 20px; border-radius:10px; background:var(--brown);
+      color:#fff; text-decoration:none; font-weight:900; box-shadow:0 6px 14px rgba(0,0,0,.16);
+      transition:filter .12s ease, transform .06s ease;
     }
-    .btn:hover{filter:brightness(1.07); transform:translateY(-1px)}
-
-    /* PARTNER */
-    .partners{padding:18px 0}
-    .partners-inner{max-width:1100px; margin:0 auto; padding:0 18px; display:flex; gap:22px; align-items:center; justify-content:center; flex-wrap:wrap; opacity:.9}
-    .partners .badge{font-weight:800; font-size:.95rem; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.7); border:var(--border)}
-    .partners img{height:26px; opacity:.8; filter:grayscale(100%); transition:opacity .2s ease, filter .2s ease}
-    .partners img:hover{opacity:1; filter:grayscale(0%)}
+    .btn:hover{filter:brightness(1.07); transform:translateY(-1px);}
 
     /* LEISTUNGEN */
-    .services{padding:60px 16px}
-    .services .wrap{max-width:1100px; margin:0 auto}
-    .services h2{margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong)}
-    .services .sub{margin:0 0 26px; color:#5a4a44}
-    .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px}
-    .cards .card h3{margin:0 0 10px; font-size:1.15rem; font-weight:900; color:#4b362f}
-    .cards .card ul{margin:0 0 14px 18px; padding:0}
-    .btn-ghost{
-      background:#fff; color:var(--brown); border:2px solid var(--brown);
-      border-radius:10px; padding:10px 14px; font-weight:900; text-decoration:none; margin-top:auto; align-self:flex-start;
-    }
-    .btn-ghost:hover{background:var(--brown); color:#fff}
+    .services{padding:60px 16px;}
+    .services .wrap{max-width:1100px; margin:0 auto;}
+    .services h2{margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong);}
+    .services .sub{margin:0 0 26px; color:#5a4a44;}
+    .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px;}
+    .cards .card h3{margin:0 0 10px; font-size:1.15rem; font-weight:900; color:#4b362f;}
+    .cards .card ul{margin:0 0 14px 18px; padding:0;}
+    .btn-ghost{background:#fff; color:var(--brown); border:2px solid var(--brown); border-radius:10px; padding:10px 14px; font-weight:900; text-decoration:none; margin-top:auto; align-self:flex-start;}
+    .btn-ghost:hover{background:var(--brown); color:#fff;}
 
-    /* WARUM / SHOP-TEASER */
-    .why{padding:56px 16px}
-    .why .wrap{max-width:1100px; margin:0 auto}
-    .why h2{text-align:center; margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong)}
-    .why .sub{text-align:center; color:#5a4a44; margin:0 0 26px}
-    .why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px}
-    .why-card{background:#fff; border:var(--border); border-radius:var(--radius); padding:18px; box-shadow:0 3px 10px rgba(0,0,0,.06); text-align:center; transition:transform .12s ease, box-shadow .12s ease}
-    .why-card:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.1)}
-    .why-card img{height:100px; width:auto; margin-bottom:-4px}
-    .why-card h3{margin:6px 0 6px; font-size:1.1rem; font-weight:900; color:#4b362f}
-    .why-card p{margin:0}
+    /* WARUM / SHOP TEASER */
+    .why{padding:56px 16px;}
+    .why .wrap{max-width:1100px; margin:0 auto;}
+    .why h2{text-align:center; margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong);}
+    .why .sub{text-align:center; color:#5a4a44; margin:0 0 26px;}
+    .why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+    .why-card{background:#fff; border:var(--border); border-radius:var(--radius); padding:18px; box-shadow:0 3px 10px rgba(0,0,0,.06); text-align:center; transition:transform .12s ease, box-shadow .12s ease;}
+    .why-card:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.1);}
+    .why-card img{height:100px; width:auto; margin-bottom:-4px;}
+    .why-card h3{margin:6px 0 6px; font-size:1.1rem; font-weight:900; color:#4b362f;}
+    .why-card p{margin:0;}
 
     /* KONTAKT */
-    .contact{padding:60px 16px}
-    .contact .wrap{max-width:720px; margin:0 auto}
-    .contact h2{margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong)}
-    .form label{display:block; margin-bottom:14px; font-weight:800; color:#4b362f}
+    .contact{padding:60px 16px;}
+    .contact .wrap{max-width:720px; margin:0 auto;}
+    .contact h2{margin:0 0 10px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong);}
+    .form label{display:block; margin-bottom:14px; font-weight:800; color:#4b362f;}
     .form input,.form textarea,.form select{
-      width:100%; padding:12px; border:1px solid #cfc7bb; border-radius:10px; font:inherit; margin-top:6px; background:#fff;
-      transition:border-color .12s ease, box-shadow .12s ease;
+      width:100%; padding:12px; border:1px solid #cfc7bb; border-radius:10px; font:inherit; margin-top:6px;
+      background:#fff; transition:border-color .12s ease, box-shadow .12s ease;
     }
-    .form input:focus,.form textarea:focus,.form select:focus{outline:none; border-color:#b2917f; box-shadow:0 0 0 3px rgba(107,70,55,.15)}
-    .form button{margin-top:14px; cursor:pointer}
+    .form input:focus,.form textarea:focus,.form select:focus{outline:none; border-color:#b2917f; box-shadow:0 0 0 3px rgba(107,70,55,.15);}
+    .form button{margin-top:14px; cursor:pointer;}
 
     /* FAQ */
-    .faq{padding:56px 16px}
-    .faq .wrap{max-width:900px; margin:0 auto}
-    .faq h2{text-align:center; margin:0 0 18px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong)}
-    .qa{background:#fff; border:var(--border); border-radius:14px; padding:14px 16px; box-shadow:0 2px 8px rgba(0,0,0,.05); margin-bottom:12px}
-    .qa summary{cursor:pointer; font-weight:800}
-    .qa p{margin:10px 0 0}
-    .qa[open]{box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .faq{padding:56px 16px;}
+    .faq .wrap{max-width:900px; margin:0 auto;}
+    .faq h2{text-align:center; margin:0 0 18px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong);}
+    .qa{background:#fff; border:var(--border); border-radius:14px; padding:14px 16px; box-shadow:0 2px 8px rgba(0,0,0,.05); margin-bottom:12px;}
+    .qa summary{cursor:pointer; font-weight:800;}
+    .qa p{margin:10px 0 0;}
+    .qa[open]{box-shadow:0 8px 20px rgba(0,0,0,.08);}
 
     /* FOOTER */
-    footer{text-align:center; padding:24px; background:rgba(255,255,255,.7); margin-top:44px; font-size:.95rem; border-top:var(--border)}
-    footer a{color:#333; text-decoration:none; font-weight:700}
-    footer a:hover{text-decoration:underline}
+    footer{text-align:center; padding:24px; background:rgba(255,255,255,.7); margin-top:44px; font-size:.95rem; border-top:var(--border);}
+    footer a{color:#333; text-decoration:none; font-weight:700;}
+    footer a:hover{text-decoration:underline;}
 
-    /* REVEAL */
-    .reveal{opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease}
-    .reveal.is-in{opacity:1; transform:none}
+    /* Reveal Animation */
+    .reveal{opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease;}
+    .reveal.is-in{opacity:1; transform:none;}
 
-    /* Handy-Anpassung: Logo kleiner und zentriert */
-@media (max-width: 720px) {
-  .logo-rail {
-    justify-content: center;    /* zentriert auf Handy */
+    /* Inline-Feedback fürs Formular */
+    .form-msg{display:none; margin-top:10px; padding:12px 14px; border-radius:10px; font-weight:700; border:1px solid; line-height:1.4;}
+    .form-msg.ok{ display:block; background:#e9f7ef; border-color:#b7e1c6; color:#155724; }
+    .form-msg.err{ display:block; background:#fdecea; border-color:#f5b5af; color:#7a1e14; }
+  html, body { max-width:100%; overflow-x:hidden; }
+
+  /* Intro endgültig bündig auf Mobil */
+@media (max-width:768px){
+  .intro{
+    padding:18px 16px 0 !important;   /* gleiche Seitenkanten wie .wrap */
+    overflow:hidden;                   /* Restpixel sicher kappen */
   }
-  .logo-rail img {
-    transform: scale(1);        /* normale Größe */
-    margin-left: 0;             /* kein negatives Verschieben */
-    max-width: 90%;             /* passt gut auf den Bildschirm */
+  .intro-grid{
+    display:block !important;          /* Grid aus, vermeidet Subpixel-Überbreite */
+    padding:0 !important;
+    margin:0 !important;
+    max-width:100% !important;
+    width:100% !important;
+  }
+  .logo-rail{
+    margin:0 0 14px 0 !important;      /* Abstand statt Grid-Gap */
+  }
+  .logo-rail img{
+    transform:none !important;
+    margin:0 auto !important;
+    display:block !important;
+    width:100% !important;
+    max-width:320px !important;
+    height:auto !important;
+  }
+  .intro .stack{
+    margin:0 !important;
+    padding:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+  .intro .card{
+    margin:0 !important;               /* keine äußeren Ränder */
+    width:100% !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
   }
 }
-/* Desktop */
-.logo-rail img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  transform: scale(1.3);
-  transform-origin: center left;
-  margin-left: -40px;
-}
 
-/* Mobile: Logo wieder kleiner und mittig */
-@media (max-width: 768px) {
-  .logo-rail img {
-    transform: scale(1);
-    margin-left: 0;
-    max-width: 90%;
-  }
-  .intro-grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
+/* Überschrift in der Intro-Karte bricht korrekt und bleibt in der Box */
+@media (max-width:768px){
+  .hero h1{
+    font-size:clamp(26px, 7vw, 36px);  /* etwas kleiner auf Handy */
+    line-height:1.2;
+    overflow-wrap:anywhere;            /* bricht auch sehr lange Wörter */
+    word-break:break-word;             /* Fallback */
+    hyphens:auto;                      /* Silbentrennung, lang="de" ist bereits gesetzt */
+    margin-right:0;
   }
 }
 
+/* Header immer sichtbar auf Mobil */
+.site-header{ position: sticky; position: -webkit-sticky; top: 0; z-index: 1000; }
+html{ scroll-padding-top: var(--header-h, 72px); }
+@supports not (position: sticky){
+  @media(max-width:768px){
+    .site-header{ position: fixed; top: 0; left: 0; right: 0; }
+    body{ padding-top: var(--header-h, 72px); }
+  }
+}
+/* optional: kleiner Schatten beim Scrollen */
+.site-header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.18); }
 
-  </style>
+/* Index: Header auf Mobil hart fixieren */
+@media (max-width:768px){
+  .site-header{
+    position:fixed !important;
+    top:0; left:0; right:0;
+    z-index:1000;
+  }
+  body{
+    padding-top: var(--header-h, 72px); /* Platz für den fixen Header */
+  }
+}
+
+/* Desktop wieder normal sticky, ohne Zusatz-Padding */
+
+/* Header auf ALLEN Viewports fix */
+:root{ --header-h:72px; }
+.site-header{
+  position:fixed !important;
+  top:0; left:0; right:0;
+  z-index:1000;
+}
+html{ scroll-padding-top: var(--header-h); } /* Anker springen nicht unter den Header */
+body{ padding-top: var(--header-h); }        /* Platz für den fixen Header */
+
+:root{ --header-h:72px; }
+
+/* Header bleibt fix – Inhalt rückt exakt um Headerhöhe runter */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+}
+main{ padding-top: var(--header-h); }   /* nicht body, sondern main */
+
+/* Leistungen: Karten gleich hoch, Buttons unten bündig */
+.cards{ align-items:stretch; }                /* Grid streckt Spalten */
+.cards .card{ display:flex; flex-direction:column; }  /* Inhalt vertikal */
+.cards .card .btn-ghost,
+.cards .card .btn{ margin-top:auto; align-self:flex-start; } /* CTA nach unten schieben */
+
+
+</style>
 </head>
 <body>
 
   <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="site-header" id="site-header">
+    <div class="header-bar">
       <nav class="primary-nav" aria-label="Hauptnavigation">
         <a href="#start" class="is-active">Startseite</a>
         <a href="#leistungen">Leistungen</a>
-        <a href="#shop">Shop</a>
         <a href="#kontakt">Kontakt</a>
+        <a href="shop.html">Shop</a>
       </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#start">Startseite</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="shop.html">Shop</a>
     </div>
   </header>
 
@@ -246,8 +335,6 @@
     </div>
   </section>
 
- 
-
   <!-- LEISTUNGEN -->
   <section id="leistungen" class="services">
     <div class="wrap">
@@ -258,7 +345,7 @@
           <h3>Volloperating</h3>
           <ul>
             <li>El Arvida übernimmt Befüllung, Reinigung, Wartung und Abrechnung.</li>
-            <li>Keine Fixkosten am Standort, Umsatzbeteiligung oder Miete möglich.</li>
+            <li>Keine Fixkosten am Standort.</li>
             <li>Ideal bei hohem Durchlauf in Produktion, Schulen und Kliniken.</li>
           </ul>
           <a class="btn-ghost" href="#kontakt">Unverbindlich anfragen</a>
@@ -275,7 +362,7 @@
         <article class="card reveal">
           <h3>Full Service für Eigengeräte</h3>
           <ul>
-            <li>Wartungsvertrag für vorhandene Automaten gängiger Marken.</li>
+            <li>Wartungsvertrag für vorhandene oder von El Arvida erworbene Automaten gängiger Marken.</li>
             <li>Reinigungspakete, Ersatzteile und 24/7 Störungsannahme.</li>
             <li>Optional Produktlieferungen und Qualitätskontrollen.</li>
           </ul>
@@ -285,7 +372,7 @@
     </div>
   </section>
 
-  <!-- WARUM / SHOP-TEASER: id="shop" für Nav-Highlight -->
+  <!-- WARUM / SHOP -->
   <section id="shop" class="why" aria-labelledby="why-title">
     <div class="wrap">
       <h2 id="why-title">Warum El Arvida</h2>
@@ -314,7 +401,7 @@
   <section id="kontakt" class="contact">
     <div class="wrap">
       <h2>Kontakt aufnehmen</h2>
-      <form action="#" method="POST" class="form reveal" onsubmit="event.preventDefault(); alert('Danke! Wir melden uns schnellstmöglich.');">
+      <form id="contactForm" action="https://formspree.io/f/xblprnzl" method="POST" class="form reveal" novalidate>
         <label>Firma* <input type="text" name="firma" required></label>
         <label>Ansprechpartner* <input type="text" name="name" required></label>
         <label>Telefon* <input type="tel" name="telefon" required></label>
@@ -328,7 +415,13 @@
           </select>
         </label>
         <label>Nachricht <textarea name="message" rows="4"></textarea></label>
+
+        <input type="text" name="website" id="hp_website" tabindex="-1" autocomplete="off" style="display:none">
+        <input type="hidden" name="_subject" value="Neue Anfrage über Website">
+        <input type="hidden" name="page" value="index.html#kontakt">
+
         <button type="submit" class="btn">Anfrage senden</button>
+        <div id="formMsg" class="form-msg" role="status" aria-live="polite" aria-atomic="true"></div>
       </form>
     </div>
   </section>
@@ -338,13 +431,18 @@
     <div class="wrap">
       <h2 id="faq-title">Häufige Fragen</h2>
       <details class="qa reveal">
-        <summary>Welche Modelle eignen sich für Schulen und Vereine?</summary>
-        <p>Für Standorte mit mittlerem Durchlauf empfehlen wir Heißgetränkeautomaten mit bargeldloser Zahlung und ein Snack-Modul. Wir beraten individuell nach Personenaufkommen.</p>
+        <summary>Welches Service-Modell passt zu uns?</summary>
+        <p><b>Volloperating:</b> Wir betreiben die Automaten vollständig für Sie – inklusive Befüllung, Reinigung, Wartung und Störungsdienst. Fokus liegt auf Verfügbarkeit und Qualität: feste Service-Intervalle, schnelle Reaktionszeiten, dokumentierte Hygieneroutinen und auf Wunsch Telemetrie für Füllstände. Sie haben einen Ansprechpartner und erhalten klare Reports zur Nutzung und Produktqualität.</p>
+
+        <p><b>Teil-/Teamoperating:</b> Sie befüllen selbst, wir liefern Gerät, Ware und Technik und übernehmen Wartung sowie Störungsdienst. Sinnvoll, wenn ein kleines Team vor Ort verfügbar ist und Sie Sortiment und Befüllrhythmus selbst steuern möchten. Ergebnis: geringere laufende Kosten bei gleichzeitig professioneller technischer Absicherung.</p>
+
+        <p><b>Full Service für Eigengeräte:</b> Bestehende Automaten bleiben im Einsatz, wir kümmern uns um Wartung, Reinigung, Ersatzteile und optional die Warenlogistik. Auf Wunsch können Sie den Automaten auch direkt bei uns kaufen (Neu- oder Ersatzgerät) und den Full Service weiter nutzen. Ergebnis: höhere Verfügbarkeit, planbare Servicekosten und längere Lebensdauer der Geräte.</p>
+
+        <p><b>Kein internes Personal</b> → Volloperating.</p>
+        <p><b>Kleines Team vorhanden</b> → Teil-/Teamoperating.</p>
+        <p><b>Eigene Geräte vorhanden oder Bereitschaft zu investieren</b> → Full Service.</p>
       </details>
-      <details class="qa reveal">
-        <summary>Wie läuft die Befüllung im Teil-Operating?</summary>
-        <p>Ihr Team befüllt selbst, wir liefern Ware, Technik und übernehmen Wartung, Störungsdienst sowie Schulung.</p>
-      </details>
+      
       <details class="qa reveal">
         <summary>Wie schnell sind Einsätze vor Ort?</summary>
         <p>In der Regel innerhalb von 24 Stunden, je nach Entfernung auch schneller.</p>
@@ -360,21 +458,40 @@
   </footer>
 
   <script>
+    // Burger-Menü (mobil)
+    (function(){
+      const header = document.getElementById('site-header');
+      const btn = document.getElementById('nav-toggle');
+      const mob = document.getElementById('mobile-nav');
+      if(!btn || !header || !mob) return;
+
+      btn.addEventListener('click', ()=>{
+        const open = header.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      mob.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=> header.classList.remove('open'));
+      });
+    })();
+
     // Nav-Highlight beim Scrollen
-    const navLinks=[...document.querySelectorAll('.primary-nav a')];
+    const navLinks=[...document.querySelectorAll('.primary-nav a, .mobile-nav a')].filter((v,i,a)=>a.findIndex(x=>x.href===v.href)===i);
     const sections=['start','leistungen','shop','kontakt'].map(id=>document.getElementById(id)).filter(Boolean);
     const navObs=new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
           const id=entry.target.id;
-          navLinks.forEach(a=>a.classList.toggle('is-active', a.getAttribute('href')==='#'+id));
+          navLinks.forEach(a=>{
+            const match = a.getAttribute('href')==='#'+id;
+            a.classList.toggle('is-active', match && a.closest('.primary-nav'));
+          });
         }
       });
     },{rootMargin:'-50% 0px -45% 0px',threshold:0});
     sections.forEach(s=>navObs.observe(s));
 
-    // Reveal-Animationen (Formular inkludiert, damit es sichtbar wird)
-    const revealEls=document.querySelectorAll('.card, .why-card, .welcome-card, .hero, .faq .qa, .partners-inner, .logo-rail, .contact .form');
+    // Reveal-Animationen
+    const revealEls=document.querySelectorAll('.card, .why-card, .welcome-card, .hero, .faq .qa, .logo-rail, .contact .form');
     revealEls.forEach(el=>el.classList.add('reveal'));
     const io=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
@@ -386,5 +503,155 @@
     },{threshold:.08, rootMargin:'0px 0px -5% 0px'});
     revealEls.forEach(el=>io.observe(el));
   </script>
+
+  <!-- Prefill aus Shop -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var prefill = sessionStorage.getItem('prefillOrder');
+    if (!prefill) return;
+
+    var ta =
+      document.querySelector('#message') ||
+      document.querySelector('form textarea[name="message"]') ||
+      document.querySelector('form textarea');
+
+    if (!ta) return;
+
+    var existing = ta.value.trim();
+    ta.value = (existing ? existing + '\n\n' : '') + prefill;
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+
+    sessionStorage.removeItem('prefillOrder');
+    location.hash = '#kontakt';
+  });
+  </script>
+
+  <!-- Formspree AJAX Submit + Inline-Feedback -->
+  <script>
+    (function(){
+      const form = document.getElementById('contactForm');
+      if(!form) return;
+      const msgBox = document.getElementById('formMsg');
+
+      form.addEventListener('submit', async (e) => {
+        if(form.reportValidity && !form.reportValidity()){ e.preventDefault(); return; }
+
+        const hp = document.getElementById('hp_website')?.value || '';
+        if(hp){ e.preventDefault(); return; }
+
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const old = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Senden…';
+
+        const showMsg = (text, ok=true) => {
+          msgBox.textContent = text;
+          msgBox.className = 'form-msg ' + (ok ? 'ok' : 'err');
+          msgBox.style.display = 'block';
+          msgBox.scrollIntoView({behavior:'smooth', block:'nearest'});
+        };
+
+        try{
+          const fd = new FormData(form);
+          const res = await fetch(form.action, { method:'POST', body: fd, headers:{ 'Accept':'application/json' } });
+          if(!res.ok) throw new Error('send');
+          form.reset();
+          showMsg('Danke! Wir haben Ihre Anfrage erhalten und melden uns kurzfristig.', true);
+        }catch(err){
+          showMsg('Senden fehlgeschlagen. Bitte später erneut versuchen oder anrufen.', false);
+        }finally{
+          btn.disabled = false; btn.textContent = old;
+        }
+      });
+    })();
+  </script>
+
+  <script>
+  // Fallback wenn sticky fehlt und kleiner Schatten beim Scrollen
+  (function(){
+    var header = document.querySelector('.site-header');
+    if(!header) return;
+    var stickyOk = CSS && (CSS.supports('position','sticky') || CSS.supports('position','-webkit-sticky'));
+    if(!stickyOk && window.matchMedia('(max-width:768px)').matches){
+      header.style.position = 'fixed';
+      header.style.top = '0';
+      header.style.left = '0';
+      header.style.right = '0';
+      document.body.style.paddingTop = getComputedStyle(header).getPropertyValue('min-height') || '72px';
+    }
+    var last = 0;
+    window.addEventListener('scroll', function(){
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      if(y > 2 && !header.classList.contains('is-scrolled')) header.classList.add('is-scrolled');
+      else if(y <= 2 && header.classList.contains('is-scrolled')) header.classList.remove('is-scrolled');
+      last = y;
+    }, {passive:true});
+  })();
+</script>
+
+<script>
+(function(){
+  var header = document.querySelector('.site-header');
+  if(!header) return;
+
+  function setPad(){
+    var h = header.offsetHeight || 72;
+    document.body.style.paddingTop = h + 'px';
+  }
+
+  // einmal sofort und bei Größenänderung
+  setPad();
+  window.addEventListener('resize', setPad);
+
+  // wenn das mobile Menü auf/zu geht, ändert sich die Header-Höhe nicht,
+  // aber falls du später etwas einblendest, sind wir safe:
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('.nav-toggle');
+    if(t){ setTimeout(setPad, 0); }
+  }, true);
+})();
+</script>
+
+<script>
+(function(){
+  const header = document.querySelector('.site-header');
+  if(!header) return;
+
+  function applyPad(){
+    const h = header.offsetHeight || parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+    document.body.style.paddingTop = h + 'px';
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+
+  // initial und bei Änderungen
+  applyPad();
+  let rid;
+  window.addEventListener('resize', ()=>{ cancelAnimationFrame(rid); rid=requestAnimationFrame(applyPad); }, {passive:true});
+  document.addEventListener('click', e=>{
+    if(e.target.closest('.nav-toggle')) setTimeout(applyPad, 0);
+  }, true);
+})();
+</script>
+
+<script>
+(function(){
+  const header = document.querySelector('.site-header');
+  const root = document.documentElement;
+  if(!header) return;
+
+  function apply(){
+    const h = header.offsetHeight || 72;
+    root.style.setProperty('--header-h', h + 'px');
+  }
+  apply();
+  window.addEventListener('resize', ()=>requestAnimationFrame(apply), {passive:true});
+  document.addEventListener('click', e=>{
+    if(e.target.closest('.nav-toggle')) setTimeout(apply, 0);
+  }, true);
+})();
+</script>
+
+
 </body>
 </html>

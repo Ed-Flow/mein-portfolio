@@ -4,113 +4,139 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Impressum – El Arvida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{--brown:#795548;--beige:#f5f0e6;--text:#2c2c2c}
-    body{margin:0;font-family:system-ui,sans-serif;line-height:1.6;background:var(--beige);color:var(--text)}
-    header{background:var(--brown);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{height:36px}
-    .brand span{font-size:1.25rem;font-weight:700}
-    nav a{color:#fff;margin-left:16px;text-decoration:none;font-weight:600}
-    nav a:hover{text-decoration:underline}
-    main{max-width:900px;margin:40px auto;padding:0 16px;background:#fff;border:1px solid #e9e2d6;border-radius:12px}
-    h1{margin:24px 16px}
-    .content{padding:0 16px 24px}
-    h2{margin-top:24px;margin-bottom:8px;font-size:1.1rem}
-    footer{text-align:center;padding:20px;background:#eee;margin-top:40px;font-size:.9rem}
+    :root{ --brown:#6b4637; --brown-deep:#533528; --accent:#ffe6cc; --header-h:72px; --text:#222; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.65; color:var(--text); background:#f4ede6;}
+    /* Header */
+    .site-header{
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(0deg, color-mix(in oklab, var(--brown) 92%, transparent), var(--brown-deep));
+      backdrop-filter:saturate(140%) blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+    .header-bar{ display:flex; align-items:center; justify-content:center; min-height:var(--header-h); padding:0 16px; }
+    .primary-nav{ display:flex; gap:32px; align-items:center; justify-content:center; }
+    .primary-nav a{
+      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
+      padding:10px 14px; border-radius:10px; transition:background .2s ease, opacity .2s ease; opacity:.95;
+    }
+    .primary-nav a:hover{background:rgba(255,255,255,.10); opacity:1;}
+    .primary-nav a.is-active{background:rgba(255,255,255,.14);}
+    .nav-toggle{display:none; width:42px; height:42px; border:0; background:transparent; cursor:pointer;}
+    .nav-toggle span{display:block; width:24px; height:2px; margin:6px auto; background:#fff; border-radius:2px; transition:transform .2s ease, opacity .2s ease;}
+    .mobile-nav{display:none;}
+    @media (max-width:768px){
+      .header-bar{min-height:56px; justify-content:space-between; padding:0 12px;}
+      .primary-nav{display:none;}
+      .nav-toggle{display:block;}
+      .site-header.open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+      .site-header.open .nav-toggle span:nth-child(2){opacity:0;}
+      .site-header.open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+      .mobile-nav{
+        display:grid; grid-template-columns:1fr; gap:10px;
+        padding:12px 16px 16px;
+        background: color-mix(in oklab, var(--brown) 96%, black 0%);
+        border-bottom:1px solid rgba(255,255,255,.14);
+      }
+      .site-header:not(.open) .mobile-nav{display:none;}
+      .mobile-nav a{
+        display:block; text-align:center; color:#fff; text-decoration:none; font-weight:800;
+        padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
+      }
+    }
+    /* Layout */
+    .container{max-width:1000px; margin:0 auto; padding:18px 16px;}
+    main{padding-top:var(--header-h);} /* Platz für fixen Header */
+    .card{background:#fff; border:1px solid #eadfd4; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.06);}
+    .card h1{margin:0; padding:22px 16px;}
+    .card .content{padding:0 16px 24px;}
+    footer{text-align:center; padding:20px; background:#eee; margin-top:40px; font-size:.9rem}
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <a href="index.html" style="display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none">
-        <img src="assets/logo.png" alt="El Arvida" class="logo">
-        <span>El Arvida</span>
-      </a>
+  <header class="site-header" id="site-header">
+    <div class="header-bar">
+      <nav class="primary-nav" aria-label="Hauptnavigation">
+        <a href="index.html#start">Startseite</a>
+        <a href="index.html#leistungen">Leistungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="shop.html">Shop</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <nav>
-      <a href="index.html">Startseite</a>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobiles Menü">
+      <a href="index.html#start">Startseite</a>
       <a href="index.html#leistungen">Leistungen</a>
       <a href="index.html#kontakt">Kontakt</a>
+      <a href="shop.html">Shop</a>
     </nav>
   </header>
 
   <main>
-    <h1>Impressum</h1>
-    <div class="content">
-
-      <h2>Angaben gemäß § 5 TMG</h2>
-      <p>
-        El Arvida – Verpflegungsautomaten &amp; Technik<br>
-        Kellerfeld 28<br>
-        77836 Rheinmünster<br>
-        Deutschland
-      </p>
-
-      <h2>Vertreten durch</h2>
-      <p>Arthur Gerter, Konrad Merz</p>
-
-      <h2>Kontakt</h2>
-      <p>
-        Telefon: +49&nbsp;152&nbsp;31958585<br>
-        Telefon: +49&nbsp;170&nbsp;2044220<br>
-        E-Mail: arthurgerter@gmail.com
-      </p>
-
-      <h2>Umsatzsteuer-ID</h2>
-      <p>
-        Umsatzsteuer-Identifikationsnummer gemäß §27a UStG: <em>wird ergänzt</em>
-      </p>
-
-      <h2>Berufsrechtliche Angaben</h2>
-      <p>Gewerbe: Handel, Vermietung und Service für Verpflegungsautomaten.</p>
-
-      <h2>EU-Streitschlichtung</h2>
-      <p>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
-        https://ec.europa.eu/consumers/odr/. Wir sind nicht verpflichtet und nicht bereit, an einem
-        Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
-      </p>
-
-      <h2>Haftung für Inhalte</h2>
-      <p>
-        Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den
-        allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch
-        nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
-        Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur
-        Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben
-        hiervon unberührt.
-      </p>
-
-      <h2>Haftung für Links</h2>
-      <p>
-        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
-        Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der
-        verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-      </p>
-
-      <h2>Urheberrecht</h2>
-      <p>
-        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem
-        deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung,
-        Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes
-        bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
-      </p>
-
-      <h2>Bildnachweise</h2>
-      <p>
-        Eigene Bilder sowie lizenzfreie Bilder von z.&nbsp;B. Unsplash/Pexels/Pixabay (Details in der
-        Datenschutzerklärung). 
-      </p>
-
-      <p style="margin-top:24px;font-size:.9rem;color:#666">
-        Stand: <!-- Datum hier eintragen -->
-      </p>
+    <div class="container">
+      <div class="card">
+        <h1>Impressum</h1>
+        <div class="content">
+          <h2>Angaben gemäß § 5 TMG</h2>
+          <p>El Arvida – Verpflegungsautomaten &amp; Technik<br>Kellerfeld 28<br>77836 Rheinmünster<br>Deutschland</p>
+          <h2>Vertreten durch</h2>
+          <p>Arthur Gerter, Konrad Merz</p>
+          <h2>Kontakt</h2>
+          <p>Telefon: +49&nbsp;152&nbsp;31958585<br>Telefon: +49&nbsp;170&nbsp;2044220<br>E-Mail: arthurgerter@gmail.com</p>
+          <h2>Umsatzsteuer-ID</h2>
+          <p>Umsatzsteuer-Identifikationsnummer gemäß §27a UStG: <em>wird ergänzt</em></p>
+          <h2>Berufsrechtliche Angaben</h2>
+          <p>Gewerbe: Handel, Vermietung und Service für Verpflegungsautomaten.</p>
+          <h2>EU-Streitschlichtung</h2>
+          <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+          <h2>Haftung für Inhalte</h2>
+          <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.</p>
+          <h2>Haftung für Links</h2>
+          <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+          <h2>Urheberrecht</h2>
+          <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+          <h2>Bildnachweise</h2>
+          <p>Eigene Bilder sowie lizenzfreie Bilder von z.&nbsp;B. Unsplash/Pexels/Pixabay.</p>
+          <p style="margin-top:24px;font-size:.9rem;color:#666">Stand: <!-- Datum hier eintragen --></p>
+        </div>
+      </div>
     </div>
   </main>
 
   <footer>
     © 2025 El Arvida – Alle Rechte vorbehalten · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
   </footer>
+
+  <script>
+  (function(){
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('nav-toggle');
+    const mob = document.getElementById('mobile-nav');
+    if(toggle){
+      toggle.addEventListener('click', ()=>{
+        const open = header.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        requestAnimationFrame(updatePad);
+      });
+    }
+    function updatePad(){
+      const h = header.offsetHeight || 72;
+      document.documentElement.style.setProperty('--header-h', h + 'px');
+      document.querySelector('main').style.paddingTop = 'calc(var(--header-h))';
+    }
+    updatePad();
+    window.addEventListener('resize', ()=>requestAnimationFrame(updatePad), {passive:true});
+  })();
+  </script>
 </body>
 </html>
