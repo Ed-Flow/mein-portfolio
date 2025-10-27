@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Widerrufsbelehrung – El Arvida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{ --brown:#6b4637; --brown-deep:#533528; --accent:#ffe6cc; --header-h:72px; --text:#222; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.65; color:var(--text); background:#f4ede6;}
+    .site-header{
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(0deg, color-mix(in oklab, var(--brown) 92%, transparent), var(--brown-deep));
+      backdrop-filter:saturate(140%) blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+    .header-bar{ display:flex; align-items:center; justify-content:center; min-height:var(--header-h); padding:0 16px; }
+    .primary-nav{ display:flex; gap:32px; align-items:center; justify-content:center; }
+    .primary-nav a{
+      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
+      padding:10px 14px; border-radius:10px; transition:background .2s ease, opacity .2s ease; opacity:.95;
+    }
+    .primary-nav a:hover{background:rgba(255,255,255,.10); opacity:1;}
+    .primary-nav a.is-active{background:rgba(255,255,255,.14);}
+    .nav-toggle{display:none; width:42px; height:42px; border:0; background:transparent; cursor:pointer;}
+    .nav-toggle span{display:block; width:24px; height:2px; margin:6px auto; background:#fff; border-radius:2px; transition:transform .2s ease, opacity .2s ease;}
+    .mobile-nav{display:none;}
+    @media (max-width:768px){
+      .header-bar{min-height:56px; justify-content:space-between; padding:0 12px;}
+      .primary-nav{display:none;}
+      .nav-toggle{display:block;}
+      .site-header.open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+      .site-header.open .nav-toggle span:nth-child(2){opacity:0;}
+      .site-header.open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+      .mobile-nav{
+        display:grid; grid-template-columns:1fr; gap:10px;
+        padding:12px 16px 16px;
+        background: color-mix(in oklab, var(--brown) 96%, black 0%);
+        border-bottom:1px solid rgba(255,255,255,.14);
+      }
+      .site-header:not(.open) .mobile-nav{display:none;}
+      .mobile-nav a{
+        display:block; text-align:center; color:#fff; text-decoration:none; font-weight:800;
+        padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
+      }
+    }
+    .container{max-width:1000px; margin:0 auto; padding:18px 16px;}
+    main{padding-top:var(--header-h);}
+    .card{background:#fff; border:1px solid #eadfd4; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.06);}
+    .card h1{margin:0; padding:22px 16px;}
+    .card .content{padding:0 16px 24px;}
+    .content h2{margin-top:18px}
+    footer{text-align:center; padding:20px; background:#eee; margin-top:40px; font-size:.9rem}
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="header-bar">
+      <nav class="primary-nav" aria-label="Hauptnavigation">
+        <a href="index.html#start">Startseite</a>
+        <a href="index.html#leistungen">Leistungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="shop.html">Shop</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobiles Menü">
+      <a href="index.html#start">Startseite</a>
+      <a href="index.html#leistungen">Leistungen</a>
+      <a href="index.html#kontakt">Kontakt</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <h1>Widerrufsbelehrung</h1>
+        <div class="content">
+          <p style="color:#666;font-size:.95rem">Anbieter El Arvida – Verpflegungsautomaten und Technik. Zuletzt aktualisiert am 27. Oktober 2025.</p>
+
+          <h2>Widerrufsrecht</h2>
+          <p>Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Frist beträgt vierzehn Tage ab dem Tag, an dem du oder eine von dir benannte Person, die nicht die Beförderung übernimmt, die Waren in Besitz genommen hat.</p>
+
+          <h2>Ausübung des Widerrufs</h2>
+          <p>Um den Widerruf auszuüben, sende eine eindeutige Erklärung an El Arvida, [Anschrift], [E Mail]. Du kannst dafür das untenstehende Musterformular verwenden, das jedoch nicht vorgeschrieben ist.</p>
+
+          <h2>Folgen des Widerrufs</h2>
+          <p>Wenn du den Vertrag widerrufst, erstatten wir alle Zahlungen einschließlich der Lieferkosten für die günstigste angebotene Standardlieferung unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag, an dem die Mitteilung über den Widerruf bei uns eingegangen ist. Für die Rückzahlung verwenden wir dasselbe Zahlungsmittel, das du bei der ursprünglichen Transaktion eingesetzt hast, sofern nichts anderes vereinbart wurde. Wir können die Rückzahlung verweigern, bis wir die Waren wieder erhalten haben oder du den Nachweis erbracht hast, dass du die Waren zurückgesandt hast, je nachdem, welches der frühere Zeitpunkt ist.</p>
+          <p>Du hast die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem Tag, an dem du uns über den Widerruf unterrichtest, an uns zurückzusenden. Du trägst die unmittelbaren Kosten der Rücksendung. Für einen etwaigen Wertverlust musst du nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen zurückzuführen ist.</p>
+
+          <h2>Ausschluss und Erlöschen</h2>
+          <p>Das Widerrufsrecht besteht nicht bei Waren, die schnell verderben können oder deren Verfallsdatum schnell überschritten würde. Es erlischt vorzeitig bei versiegelten Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind, wenn ihre Versiegelung nach der Lieferung entfernt wurde.</p>
+
+          <h2>Muster Widerrufsformular</h2>
+          <p>
+            An El Arvida, Kellerfeld 28 77836 Rheinmünster Deutschland, arthurgerter@gmail.com<br>
+            Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über den Kauf der folgenden Waren<br>
+            Bestellt am [Datum] erhalten am [Datum]<br>
+            Name der Verbraucherin oder des Verbrauchers<br>
+            Anschrift der Verbraucherin oder des Verbrauchers<br>
+            Unterschrift der Verbraucherin oder des Verbrauchers nur bei Mitteilung auf Papier<br>
+            Datum
+          </p>
+
+          <p style="margin-top:18px;font-size:.9rem;color:#666">Bitte ersetze die Platzhalter durch deine echten Kontaktdaten.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 El Arvida – Alle Rechte vorbehalten · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="agb.html">AGB</a> · <a href="widerruf.html">Widerruf</a>
+  </footer>
+
+  <script>
+  (function(){
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('nav-toggle');
+    if(toggle){
+      toggle.addEventListener('click', ()=>{
+        const open = header.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        requestAnimationFrame(updatePad);
+      });
+    }
+    function updatePad(){
+      const h = header.offsetHeight || 72;
+      document.documentElement.style.setProperty('--header-h', h + 'px');
+      document.querySelector('main').style.paddingTop = 'calc(var(--header-h))';
+    }
+    updatePad();
+    window.addEventListener('resize', ()=>requestAnimationFrame(updatePad), {passive:true});
+  })();
+  </script>
+</body>
+</html>
