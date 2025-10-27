@@ -408,12 +408,14 @@ main{ padding-top: var(--header-h); }   /* nicht body, sondern main */
         <label>E-Mail* <input type="email" name="email" required></label>
         <label>Mitarbeiterzahl <input type="number" name="mitarbeiter" min="1"></label>
         <label>Gewünschtes Modell
-          <select name="modell">
-            <option value="Volloperating">Volloperating</option>
-            <option value="Teiloperating">Teil oder Teamoperating</option>
-            <option value="FullService">Full Service</option>
-          </select>
+        <select name="modell" required>
+        <option value="Volloperating">Volloperating</option>
+        <option value="Teiloperating">Teil oder Teamoperating</option>
+        <option value="FullService">Full Service</option>
+        <option value="Automatenverkauf">Automatenkauf ohne Service</option> 
+        </select>
         </label>
+
         <label>Nachricht <textarea name="message" rows="4"></textarea></label>
 
         <input type="text" name="website" id="hp_website" tabindex="-1" autocomplete="off" style="display:none">
@@ -442,7 +444,7 @@ main{ padding-top: var(--header-h); }   /* nicht body, sondern main */
         <p><b>Kleines Team vorhanden</b> → Teil-/Teamoperating.</p>
         <p><b>Eigene Geräte vorhanden oder Bereitschaft zu investieren</b> → Full Service.</p>
       </details>
-      
+
       <details class="qa reveal">
         <summary>Wie schnell sind Einsätze vor Ort?</summary>
         <p>In der Regel innerhalb von 24 Stunden, je nach Entfernung auch schneller.</p>
