@@ -14,7 +14,7 @@
       --brown:#6b4637; --brown-deep:#533528; --accent:#ffe6cc;
       --header-h:72px; --text:#222; --text-strong:#101010;
       --maxw:1200px; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.08);
-      --border:1px solid rgba(0,0,0,.06); --card:#fff; --muted:#5a4a44;
+      --border:1px solid rgba(0,0,0,.06); --card:#fff;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth; scroll-padding-top:var(--header-h)}
@@ -28,7 +28,6 @@
     }
     a{color:inherit; text-decoration:none}
 
-    /* Header */
     .site-header{
       position:sticky; top:0; z-index:1000;
       background:
@@ -59,9 +58,11 @@
       .site-header.open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg);}
       .site-header.open .nav-toggle span:nth-child(2){opacity:0;}
       .site-header.open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+      .header-bar{justify-content:flex-start; padding:0 12px; min-height:56px;}
+      .nav-toggle{position:static; transform:none; margin:0; width:40px; height:40px;}
+      .cart-btn{position:static; transform:none; margin-left:auto;}
     }
 
-    /* Seite */
     .wrap{max-width:var(--maxw); margin:0 auto; padding:26px 16px 60px; flex:1;}
     .shop-head{text-align:center; margin-bottom:18px;}
     h1{margin:0 0 12px; font-size:clamp(26px,3vw,34px); font-weight:900; color:var(--text-strong);}
@@ -69,41 +70,57 @@
     .chip{border:1px solid #d3c7ba; background:#fff; border-radius:999px; padding:10px 14px; font-weight:900; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.06);}
     .chip.active{background:color-mix(in oklab, var(--brown) 80%, white 0%); border-color:#5a3c2f; color:#fff}
 
-    /* Karten */
     .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; align-items:stretch;}
     .card{background:var(--card); border:var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column; height:100%;}
     .thumb{height:240px; padding:12px; background:#f4ece8; display:flex; align-items:center; justify-content:center; cursor:pointer;}
     .thumb img{max-height:100%; max-width:100%;}
-    .body{display:grid; grid-template-rows:auto 1fr auto; gap:10px; padding:14px;}
-    .title{margin:0 0 6px; cursor:pointer}
-    .desc{margin:0;}
+    .body{padding:14px; display:flex; flex-direction:column; gap:10px; flex:1; min-height:0;}
+    .title{margin:0 0 6px; cursor:pointer; line-height:1.25}
+    .desc{margin:0; line-height:1.45}
+    .card.has-price .title{
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      min-height:calc(1em * 2 * 1.25);
+    }
+    .card.has-price .desc{
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      min-height:calc(1em * 2 * 1.45);
+    }
+
+    .price{margin:.4rem 0 0; display:flex; flex-direction:column; gap:2px;}
+    .price .total{ font-size:1.05rem; font-weight:900; letter-spacing:.2px; }
+    .price .sub{ font-size:.92rem; line-height:1.35; color:#6a5a54; }
+    .price .sub a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+
     .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 18px; border-radius:10px; border:2px solid var(--brown); background:var(--brown); color:#fff; font-weight:900; cursor:pointer; box-shadow:0 6px 14px rgba(0,0,0,.16);}
     .btn.secondary{background:#fff; color:#4b362f}
     .btn:hover{filter:brightness(1.07); transform:translateY(-1px);}
-    .select-btn[aria-pressed="true"]{background:#fff; color:#4b362f}
+    .select-btn{height:44px; padding:0 18px; width:100%; align-self:stretch; display:inline-flex; align-items:center; justify-content:center; margin-top:auto;}
+    .select-btn[aria-pressed="true"]{ background:#fff; color:#4b362f; }
 
-    /* Drawer */
     .drawer{position:fixed; right:0; top:0; height:100%; width:min(360px,92%); background:#fff; border-left:var(--border); box-shadow:-10px 0 30px rgba(0,0,0,.18); display:none; z-index:1003; padding:16px; overflow:auto;}
     .drawer header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px}
     .drawer h2{margin:0; font-size:22px; font-weight:900}
     .line{height:1px; background:#eee; margin:10px 0}
     .cart-list{display:grid; gap:10px}
-
-    .cart-item{display:grid; grid-template-columns:56px minmax(0,1fr) auto; align-items:center; gap:12px; border:1px solid #eee; border-radius:12px; padding:12px;}
+    .cart-item{
+      display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:12px;
+      border:1px solid #eee; border-radius:12px; padding:12px; overflow:visible;
+    }
     .cart-item img{width:56px; height:auto; border-radius:8px; background:#f6f2ef; border:1px solid #eee}
     .info{min-width:0;}
     .info .t{font-weight:800; margin-bottom:2px}
     .info .d{color:#6a5a54; font-size:.92rem; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-    .actions{justify-self:end; display:flex; align-items:center; gap:8px; background:#faf7f5; border:1px solid #eadfd8; padding:6px; border-radius:12px; white-space:nowrap;}
-    .qtywrap{display:flex; align-items:center; gap:8px;}
-    .qtybtn{width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #cdb9ad; background:#fff; border-radius:8px; font-size:16px; font-weight:900; line-height:1; cursor:pointer;}
+    .actions{justify-self:end; display:flex; align-items:center; gap:8px; max-width:100%;}
+    .qtywrap{display:flex; align-items:center; gap:8px; flex-wrap:nowrap;}
+    .qtybtn{width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #cdb9ad; background:#fff; border-radius:8px; font-size:16px; font-weight:900; line-height:1; cursor:pointer; flex:0 0 auto;}
     .qtybtn:hover{background:#f4eee9;}
     .qtybtn:focus-visible{outline:2px solid #6b4637; outline-offset:2px;}
-    .qtyval{width:26px; text-align:center; font-variant-numeric:tabular-nums; font-weight:800;}
-    .delbtn{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border:1px solid #e5d6cf; background:#fff; border-radius:8px; cursor:pointer; font-size:16px; line-height:1;}
+    .qtyval{min-width:24px; text-align:center; font-variant-numeric:tabular-nums; font-weight:800;}
+    .delbtn{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border:1px solid #e5d6cf; background:#fff; border-radius:8px; cursor:pointer; font-size:16px; line-height:1; flex:0 0 auto;}
     .delbtn:hover{background:#f8f3f0}
     .drawer .bottom{position:sticky; bottom:0; background:#fff; padding-top:10px}
     .empty{color:#666; font-size:.95rem}
+    .pay-actions .btn{ width:100%; }
 
     footer{text-align:center; padding:24px; background:rgba(255,255,255,.7); font-size:.95rem; border-top:var(--border);}
     footer a{color:#333; text-decoration:none; font-weight:700;}
@@ -113,19 +130,24 @@
     @media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
     @media (max-width:520px){ .grid{grid-template-columns:1fr} }
 
-    @media (max-width:420px){
-      .cart-item{grid-template-columns:56px minmax(0,1fr); grid-template-areas:"img info" "img actions";}
-      .cart-item img{grid-area:img;} .cart-item .info{grid-area:info;} .cart-item .actions{grid-area:actions; justify-self:end;}
+    @media (max-width:480px){
+      .cart-item{
+        grid-template-columns:56px minmax(0,1fr);
+        grid-template-areas:
+          "img info"
+          "img actions";
+      }
+      .cart-item img{ grid-area: img; }
+      .cart-item .info{ grid-area: info; }
+      .cart-item .actions{ grid-area: actions; justify-self: end; }
     }
 
-    /* Modal */
     body.modal-open{overflow:hidden}
     .modal-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:1100;}
     .modal{position:fixed; inset:0; display:grid; place-items:center; pointer-events:none; z-index:1101;}
     .modal-inner{width:min(860px,92vw); background:#fff; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.06); overflow:hidden; transform:translateY(10px); opacity:0; transition:opacity .2s ease, transform .2s ease;}
     .modal header{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-bottom:1px solid #eee;}
     .modal header h3{margin:0; font-size:20px; font-weight:900}
-    .modal .close{width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #e5d6cf; background:#fff; border-radius:10px; cursor:pointer; font-size:18px;}
     .modal .content{display:grid; grid-template-columns:360px 1fr; gap:18px; padding:16px;}
     .modal .content .pic{background:#f4ece8; border:1px solid #eee; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:12px;}
     .modal .content img{max-width:100%; height:auto}
@@ -137,106 +159,10 @@
     .modal.show .modal-inner{opacity:1; transform:none; pointer-events:auto}
     .modal.show ~ .modal-backdrop{opacity:1; pointer-events:auto}
     @media (max-width:740px){ .modal .content{grid-template-columns:1fr} }
-
-    /* Shop-Header fix: Burger + Warenkorb getrennt ausrichten (mobil) */
-@media (max-width:768px){
-  .header-bar{
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding:0 12px;
-    position:relative; /* nur zur Sicherheit */
-    min-height:56px;
-  }
-  .nav-toggle{
-    position:static;   /* nicht absolut → kein Überlappen */
-    transform:none;
-    margin:0;
-    width:40px; height:40px;
-  }
-  .cart-btn{
-    position:static;   /* nicht absolut */
-    transform:none;
-    margin-left:auto;  /* schiebt den Warenkorb ganz nach rechts */
-  }
-}
-
-/* Header immer sichtbar auf Mobil */
-.site-header{ position: sticky; position: -webkit-sticky; top: 0; z-index: 1000; }
-html{ scroll-padding-top: var(--header-h, 72px); }
-@supports not (position: sticky){
-  @media(max-width:768px){
-    .site-header{ position: fixed; top: 0; left: 0; right: 0; }
-    body{ padding-top: var(--header-h, 72px); }
-  }
-}
-/* optional: kleiner Schatten beim Scrollen */
-.site-header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.18); }
-
-/* Modal fix mobil/desktop */
-.product-modal{                 /* dein Overlay */
-  position: fixed; inset: 0; z-index: 10000;
-  display: flex; align-items: center; justify-content: center;
-  padding: 12px;
-  background: rgba(0,0,0,.25);
-}
-.product-modal .modal-card{     /* die weiße Karte im Overlay */
-  width: min(100%, 920px);
-  max-height: calc(100dvh - 24px);   /* passt in den Screen */
-  overflow: hidden;                   /* Rahmen bleibt sauber */
-  border-radius: 14px; background: #fff;
-  display: flex; flex-direction: column;
-}
-.product-modal .modal-body{     /* eigentlicher Inhalt */
-  overflow-y: auto;             /* ← HIER wird gescrollt */
-  -webkit-overflow-scrolling: touch;
-  padding: 16px;
-}
-
-/* Layout innen: Bild/Details stacken auf Mobil */
-@media (max-width: 768px){
-  .product-modal .modal-body .grid{ display:block; }
-  .product-modal .modal-body img{
-    width: 100%; height: auto; max-height: 40vh; object-fit: contain;
-  }
-}
-
-html.modal-open, body.modal-open { overflow: hidden; }
-
-
-
-
-  
-/* ==== Modal viewport fit & inner scrolling (mobile + desktop) ==== */
-.modal{ padding:12px; }
-.modal-inner{
-  width: min(920px, 100% - 24px);
-  max-height: calc(100dvh - 24px);
-  display: flex; flex-direction: column;
-  overflow: hidden;
-}
-.modal header{
-  position: sticky; top: 0; z-index: 1;
-  background: #fff;
-}
-.modal .content{
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 16px;
-}
-@media (max-width: 740px){
-  .modal .content{ display: block; }
-  .modal .content .pic img{
-    width: 100%; height: auto; max-height: 40vh; object-fit: contain;
-  }
-}
-html.modal-open, body.modal-open { overflow: hidden; }
-
-</style>
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="site-header" id="site-header">
     <div class="header-bar">
       <nav class="primary-nav" aria-label="Hauptnavigation">
@@ -260,7 +186,6 @@ html.modal-open, body.modal-open { overflow: hidden; }
     </div>
   </header>
 
-  <!-- CONTENT -->
   <main class="wrap" id="shop">
     <div class="shop-head">
       <h1>Shop</h1>
@@ -272,12 +197,12 @@ html.modal-open, body.modal-open { overflow: hidden; }
   <footer>
     © 2025 El Arvida – Alle Rechte vorbehalten ·
     <a href="impressum.html">Impressum</a> ·
-    <a href="datenschutz.html">Datenschutz</a>
-    <a href="agb.html">AGB</a>
-    <a href="widerruf.html">Widerruf</a>
+    <a href="datenschutz.html">Datenschutz</a> ·
+    <a href="agb.html">AGB</a> ·
+    <a href="widerruf.html">Widerruf</a> ·
+    <a href="versand.html">Versand</a>
   </footer>
 
-  <!-- Drawer Warenkorb -->
   <aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
     <header>
       <h2 id="cartTitle">Warenkorb</h2>
@@ -286,11 +211,20 @@ html.modal-open, body.modal-open { overflow: hidden; }
     <div class="cart-list" id="cartList"></div>
     <div class="line"></div>
     <div class="bottom">
-      <button class="btn" id="askOffer">Angebot anfragen</button>
+      <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:900">
+        <span>Gesamt</span>
+        <span id="cartTotal">0,00 €</span>
+      </div>
+      <div class="pay-actions" style="display:grid; gap:10px">
+        <button class="btn" id="prepayBtn">Vorkasse bestellen</button>
+        <button class="btn" id="askOffer">Angebot anfragen</button>
+        <div id="paypalArea" style="margin-top:10px"></div>
+        <div id="cardArea" style="margin-top:6px"></div>
+        <p class="hint" id="paypalHint" style="margin-top:6px;color:#6a5a54;"></p>
+      </div>
     </div>
   </aside>
 
-  <!-- Produkt-Detail-Modal -->
   <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-inner" role="document">
       <header>
@@ -313,8 +247,110 @@ html.modal-open, body.modal-open { overflow: hidden; }
   </div>
   <div class="modal-backdrop" id="modalBackdrop"></div>
 
+  <div class="modal" id="prepayConfirmModal" role="dialog" aria-modal="true" aria-labelledby="prepayConfirmTitle" aria-hidden="true">
+    <div class="modal-inner" role="document">
+      <header>
+        <h3 id="prepayConfirmTitle">Bestellung prüfen und bestätigen</h3>
+        <button class="close" id="prepayConfirmClose" aria-label="Schließen">×</button>
+      </header>
+      <div class="content" style="display:block; padding:16px">
+        <div id="prepayConfirmSummary" style="white-space:pre-wrap; margin-bottom:12px"></div>
+
+        <div class="form-row" style="display:grid; gap:8px; margin:12px 0">
+          <label for="confirmEmail" style="font-weight:800">E-Mail für Bestätigung</label>
+          <input id="confirmEmail" type="email" inputmode="email" autocomplete="email" required
+                 placeholder="name@beispiel.de"
+                 style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit">
+          <small id="confirmEmailErr" style="color:#b00020; display:none">Bitte eine gültige E-Mailadresse eingeben.</small>
+        </div>
+
+        <div class="form-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0">
+          <div class="form-row" style="display:grid; gap:8px;">
+            <label for="confirmName" style="font-weight:800">Vollständiger Name</label>
+            <input id="confirmName" type="text" autocomplete="name" required
+                   placeholder="Vor und Nachname"
+                   style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit">
+            <small id="confirmNameErr" style="color:#b00020; display:none">Bitte Namen angeben.</small>
+          </div>
+          <div class="form-row" style="display:grid; gap:8px;">
+            <label for="confirmPhone" style="font-weight:800">Telefon</label>
+            <input id="confirmPhone" type="tel" inputmode="tel" autocomplete="tel" required
+                   placeholder="+49 ..."
+                   style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit">
+            <small id="confirmPhoneErr" style="color:#b00020; display:none">Bitte eine gültige Telefonnummer angeben.</small>
+          </div>
+        </div>
+
+        <div class="form-grid" style="display:grid; grid-template-columns:2fr 1fr 1.3fr; gap:12px; margin:12px 0">
+          <div class="form-row" style="display:grid; gap:8px;">
+            <label for="addrStreet" style="font-weight:800">Straße und Hausnummer</label>
+            <input id="addrStreet" type="text" autocomplete="address-line1" required
+                   placeholder="Musterstraße 12"
+                   style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit">
+            <small id="addrStreetErr" style="color:#b00020; display:none">Bitte Straße und Hausnummer angeben.</small>
+          </div>
+          <div class="form-row" style="display:grid; gap:8px;">
+            <label for="addrZip" style="font-weight:800">PLZ</label>
+            <input id="addrZip" type="text" inputmode="numeric" autocomplete="postal-code" required
+                   placeholder="12345"
+                   style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit">
+            <small id="addrZipErr" style="color:#b00020; display:none">Bitte eine gültige PLZ angeben.</small>
+          </div>
+          <div class="form-row" style="display:grid; gap:8px;">
+            <label for="addrCity" style="font-weight:800">Ort</label>
+            <input id="addrCity" type="text" autocomplete="address-level2" required
+                   placeholder="Musterstadt"
+                   style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit">
+            <small id="addrCityErr" style="color:#b00020; display:none">Bitte Ort angeben.</small>
+          </div>
+        </div>
+
+        <div class="form-row" style="display:grid; gap:8px; margin:12px 0">
+          <label for="confirmMessage" style="font-weight:800">Nachricht optional</label>
+          <textarea id="confirmMessage" rows="3"
+                    placeholder="Hinweise zur Lieferung oder abweichende Rechnungsadresse"
+                    style="width:100%; padding:12px; border:1px solid #d9ccc3; border-radius:10px; font:inherit; resize:vertical"></textarea>
+        </div>
+
+        <label style="display:flex; gap:10px; align-items:flex-start; margin:10px 0 14px">
+          <input type="checkbox" id="confirmCheckbox" style="margin-top:4px">
+          <span>Ich bestätige die kostenpflichtige Bestellung per Vorkasse. Ich erhalte im nächsten Schritt die Bankdaten sowie eine Bestätigung per E-Mail.</span>
+        </label>
+        <div class="actions-row">
+          <button class="btn" id="prepayConfirmBtn" disabled>Bestellung bestätigen</button>
+          <button class="btn secondary" id="prepayConfirmCancel">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="prepayConfirmBackdrop"></div>
+
+  <div class="modal" id="prepayModal" role="dialog" aria-modal="true" aria-labelledby="prepayTitle" aria-hidden="true">
+    <div class="modal-inner" role="document">
+      <header>
+        <h3 id="prepayTitle">Vorkasse und Banküberweisung</h3>
+        <button class="close" id="prepayClose" aria-label="Schließen">×</button>
+      </header>
+      <div class="content" style="display:block; padding:16px">
+        <div id="prepaySummary" class="muted" style="white-space:pre-wrap; margin-bottom:12px"></div>
+        <div class="bank" style="border:1px solid #eee; border-radius:12px; padding:12px; background:#faf7f4; margin-bottom:12px">
+          <div><strong>Kontoinhaber:</strong> <span id="bkName"></span></div>
+          <div><strong>IBAN:</strong> <span id="bkIban" style="font-variant-numeric:tabular-nums"></span></div>
+          <div><strong>BIC:</strong> <span id="bkBic"></span></div>
+          <div><strong>Bank:</strong> <span id="bkBank"></span></div>
+          <div><strong>Verwendungszweck:</strong> <span id="bkPurpose"></span></div>
+        </div>
+        <div class="actions-row">
+          <button class="btn secondary" id="prepayCopy">Daten kopieren</button>
+          <button class="btn" id="prepayGoto">Kontaktformular öffnen</button>
+        </div>
+        <p id="mailStatus" class="muted" style="margin-top:10px;"></p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="prepayBackdrop"></div>
+
   <script>
-    /* Mobiles Menü */
     (function(){
       const header = document.getElementById('site-header');
       const btn = document.getElementById('nav-toggle');
@@ -328,287 +364,67 @@ html.modal-open, body.modal-open { overflow: hidden; }
       }
     })();
 
-    /* ----------------------- PRODUKT-DATEN ----------------------- */
-    // Kategorien: Kaffee Automat, Snack & Food Automat, Theken Automat
     const PRODUCTS = [
-      // Theken Automat
-      { id:'kometa', cartId:'kometa', displayName:'Necta Kometa',
-    title:'Necta Kometa', desc:'Tisch Vollautomat für Theke und Büro.',
-    details:'Kompakter Vollautomat für kleine bis mittlere Teams – leise, servicefreundlich, konstante Qualität.',
-    features:[
-      '80–100 Tassen/Tag empfohlen',
-      'Z4000 HoReCa Brüher (14 g); Bohnenbehälter 0,6–1,1 kg',
-      'Wasseroptionen & Zubehör: 20-L-Tank (auch mit FlowJet), 5-L-Externtank, MDB-Kit, Abwasser-Festanschluss, Satzauswurf'
-    ],
-    img:'assets/kometa.png', cat:'Theken Automat' },
+      { id:'kometa', cartId:'kometa', displayName:'Necta Kometa', title:'Necta Kometa', desc:'Tisch Vollautomat für Theke und Büro.', details:'Kompakter Vollautomat für kleine bis mittlere Teams – leise, servicefreundlich, konstante Qualität.', features:['80–100 Tassen/Tag empfohlen','Z4000 HoReCa Brüher (14 g); Bohnenbehälter 0,6–1,1 kg','Wasseroptionen & Zubehör: 20-L-Tank (auch mit FlowJet), 5-L-Externtank, MDB-Kit, Abwasser-Festanschluss, Satzauswurf'], img:'assets/kometa.png', cat:'Theken Automat' },
+      { id:'krea-prime', cartId:'krea-prime', displayName:'Necta KREA Prime ES + 3 IN', title:'Necta KREA Prime', desc:'Beliebter Table Top Kaffeeautomat.', details:'Table-Top-Vollautomat für Büro & Empfang – robuste HoReCa-Technik, schnelle Ausgabe, einfache Reinigung.', features:['ca. 150 Tassen/Tag empfohlen','Z4000 HoReCa Brüher (14 g); Bohnenbehälter ~1,2 kg','Payment vorbereitet (MDB/EXE), seitliches Bezahlmodul optional','Wasseroptionen: 20-L-Tank-Kit, Abwasser-Festanschluss'], img:'assets/krea_prime.png', cat:'Theken Automat' },
+      { id:'krea-touch', cartId:'krea-touch', displayName:'Necta KREA Touch', title:'Necta KREA Touch', desc:'Premium Kaffeeautomat mit optionaler Frischmilch.', details:'Touch-Bedienung und HoReCa-Brüher – ideal für Büros und Lounges.', features:['ca. 150 Tassen/Tag empfohlen','10″ Touchdisplay, Z4000 HoReCa Brüher (14 g)','Payment vorbereitet (MDB/EXE), Frischmilch-Option'], img:'assets/krea_touch.png', cat:'Theken Automat' },
+      { id:'kalea-2', cartId:'kalea-2', displayName:'Necta Kalea 2 ES + IN', title:'Necta Kalea', desc:'Premium Kaffeeautomat mit optionaler Frischmilch.', details:'Barista-Qualität auf Knopfdruck – für repräsentative Zonen und höhere Frequenzen.', features:['ca. 150–200 Tassen/Tag (Modell/Setup)','10″ Touch, Z4000 HoReCa Brüher (14 g), optional Frischmilch','Payment vorbereitet (MDB/EXE), Zubehör: Kühlschrank/Unterschrank'], img:'assets/kalea.png', cat:'Theken Automat' },
 
-  { id:'krea-prime', cartId:'krea-prime', displayName:'Necta KREA Prime ES + 3 IN',
-    title:'Necta KREA Prime', desc:'Beliebter Table Top Kaffeeautomat.',
-    details:'Table-Top-Vollautomat für Büro & Empfang – robuste HoReCa-Technik, schnelle Ausgabe, einfache Reinigung.',
-    features:[
-      'ca. 150 Tassen/Tag empfohlen',
-      'Z4000 HoReCa Brüher (14 g); Bohnenbehälter ~1,2 kg',
-      'Payment vorbereitet (MDB/EXE), seitliches Bezahlmodul optional',
-      'Wasseroptionen: 20-L-Tank-Kit, Abwasser-Festanschluss'
-    ],
-    img:'assets/krea_prime.png', cat:'Theken Automat' },
+      { id:'barista-1000-touch-1bw', cartId:'barista-1000-touch-1bw', displayName:'Barista 1000 Touch 1 BW', title:'Barista 1000 Touch 1 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.', details:'Leistungsstarker Vollautomat mit Touchscreen für stark frequentierte Standorte.', features:['bis zu 700 Becher/Tag','Z4000 Brüher, 2 Boiler, 1 Becherwerk, 13,3″ Touch','Cashless ready (MDB/EXE), integrierte Konnektivität, Breasy','Großes Bechermagazin'], img:'assets/barista_1000.png', cat:'Kaffee Automat' },
+      { id:'barista-1000-touch-2bw', cartId:'barista-1000-touch-2bw', displayName:'Barista 1000 Touch 2 BW', title:'Barista 1000 Touch 2 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.', details:'Robuster Standautomat mit hohem Durchsatz.', features:['bis zu 700 Becher/Tag','Z4000, 2 Boiler, 2 Becherwerke, 13,3″ Touch','Cashless ready (MDB/EXE), integrierte Konnektivität, Breasy'], img:'assets/barista_1000.png', cat:'Kaffee Automat' },
+      { id:'barista-1000-1bw', cartId:'barista-1000-1bw', displayName:'Barista 1000 1 BW', title:'Barista 1000 1 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.', details:'Robuster Standautomat mit hohem Durchsatz.', features:['bis zu 700 Becher/Tag','Z4000, 2 Boiler, 1 Becherwerk, Direktwahl','Cashless ready (MDB/EXE), Breasy-ready'], img:'assets/barista_1000.png', cat:'Kaffee Automat' },
+      { id:'barista-1000-2bw', cartId:'barista-1000-2bw', displayName:'Barista 1000 2 BW', title:'Barista 1000 2 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.', details:'Robuster Standautomat mit hohem Durchsatz.', features:['bis zu 700 Becher/Tag','Z4000, 2 Boiler, 2 Becherwerke, Direktwahl','Cashless ready (MDB/EXE), Breasy-ready'], img:'assets/barista_1000.png', cat:'Kaffee Automat' },
+      { id:'barista-600', cartId:'barista-600', displayName:'Barista 600', title:'Barista 600', desc:'Zuverlässiger Automat für mittlere bis hohe Frequenzen.', details:'Bewährte Technik mit sehr guter Ausgabeleistung.', features:['bis zu 600 Becher/Tag','Z4000 Brüher, 1 Boiler, große Auswahl','Cashless ready (MDB/EXE)'], img:'assets/barista_600.png', cat:'Kaffee Automat' },
+      { id:'barista-500-touch', cartId:'barista-500-touch', displayName:'Barista 500 Touch', title:'Barista 500 Touch', desc:'Großer Heißgetränkeautomat.', details:'Starkes Preis-Leistungs-Verhältnis mit Touchbedienung.', features:['bis zu 500 Becher/Tag','Z4000, 1 Boiler, 13,3″ Touch','Cashless ready (MDB/EXE)'], img:'assets/barista_touch_500.png', cat:'Kaffee Automat' },
+      { id:'barista-300-touch', cartId:'barista-300-touch', displayName:'Barista 300 Touch', title:'Barista 300 Touch', desc:'Solide Technik für häufige Nutzung.', details:'Kompakter Standautomat mit Touchbedienung.', features:['bis zu 300 Becher/Tag','Z4000, 1 Boiler, Touch','Cashless ready (MDB/EXE)'], img:'assets/barista_touch_300.png', cat:'Kaffee Automat' },
 
-  { id:'krea-touch', cartId:'krea-touch', displayName:'Necta KREA Touch',
-    title:'Necta KREA Touch', desc:'Premium Kaffeeautomat mit optionaler Frischmilch.',
-    details:'Touch-Bedienung und HoReCa-Brüher – ideal für Büros und Lounges.',
-    features:[
-      'ca. 150 Tassen/Tag empfohlen',
-      '10″ Touchdisplay, Z4000 HoReCa Brüher (14 g)',
-      'Payment vorbereitet (MDB/EXE), Frischmilch-Option'
-    ],
-    img:'assets/krea_touch.png', cat:'Theken Automat' },
+      { id:'gusto-10', cartId:'gusto-10', displayName:'Gusto 10', title:'Gusto 10', desc:'Snack & Food Automat mit hoher Kapazität.', details:'Vielseitiger Automat mit ETL-Preisschildern und Vandalismusschutz.', features:['bis zu 400 Verkäufe/Tag empfohlen','55 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen (Snack/Drink)','Payment MDB/EXE, Breasy-ready'], img:'assets/gusto_10-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-8-lift', cartId:'gusto-8-lift', displayName:'Gusto 8 Lift', title:'Gusto 8 Lift', desc:'Produktschonende Ausgabe über Lift.', details:'Ideal für empfindliche Waren – sichere, sanfte Auslieferung.', features:['bis zu 350 Verkäufe/Tag empfohlen','Lift-Ausgabe, bis zu 2 Temperaturzonen','Payment MDB/EXE, Vandalismusschutz'], img:'assets/gusto_8_lift-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-8', cartId:'gusto-8', displayName:'Gusto 8', title:'Gusto 8', desc:'Flexibler Snack/Drink Automat.', details:'Kapazitive Tastatur, Thermoglas, LED-Innenraum.', features:['bis zu 330 Verkäufe/Tag empfohlen','30 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen','Payment MDB/EXE, Breasy-ready'], img:'assets/gusto_8-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-8-twin', cartId:'gusto-8-twin', displayName:'Gusto 8 Twin', title:'Gusto 8 Twin', desc:'Kombi Snack/Flasche/Food.', details:'Mehr Sortiment durch Twin-Bestückung.', features:['bis zu 360 Verkäufe/Tag empfohlen','44 Wahlen; Zonen z. B. Food 0–4 °C / Snack 8–15 °C / Drink 5–8 °C','Payment MDB/EXE'], img:'assets/version--gusto-8t-win.png', cat:'Snack & Food Automat' },
+      { id:'gusto-6-L', cartId:'gusto-6-L', displayName:'Gusto 6 L', title:'Gusto 6 L', desc:'Snack & Drink mit zwei Temperaturzonen.', details:'Kompakter Automat für mittelstarke Standorte.', features:['bis zu 300 Verkäufe/Tag empfohlen','30 Wahlen / 6 Schubladen; 2 Zonen (z. B. 5–7 °C / 10–15 °C)','Payment MDB/EXE'], img:'assets/gusto_6_L-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-6-M', cartId:'gusto-6-M', displayName:'Gusto 6 M', title:'Gusto 6 M', desc:'Snack & Drink – LED-Innenraum, Fotozellen.', details:'Kapazitive Tastatur, Thermoglas, optional Telemetrie.', features:['bis zu 300 Verkäufe/Tag empfohlen','30 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen','Payment MDB/EXE, Breasy-ready'], img:'assets/gusto_6_M-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-6-M-twin', cartId:'gusto-6-M-twin', displayName:'Gusto 6 M Twin', title:'Gusto 6 M Twin', desc:'Snack/Food-Kombi mit bis zu 3 Zonen.', details:'Für gemischte Waren inkl. Frischeprodukte.', features:['bis zu 280 Verkäufe/Tag empfohlen','30 Wahlen / 6 Schubladen; Zonen z. B. Food 0–4 °C / Snack 8–15 °C','Payment MDB/EXE'], img:'assets/gusto_6_M_twin-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-6-M-mini', cartId:'gusto-6-M-mini', displayName:'Gusto 6 Mini', title:'Gusto 6 Mini', desc:'Kompakter Automat – Steuerung via Brio Touch/Solista.', details:'Kleine Stellfläche, ideal als Ergänzung.', features:['bis zu 170 Verkäufe/Tag empfohlen','21 Wahlen / 4 Schubladen; Snack/Flasche/Dose','Payment MDB/EXE'], img:'assets/gusto_6_mini-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-6-drum-classic', cartId:'gusto-6-drum-classic', displayName:'Gusto 6 Drum Classic', title:'Gusto 6 Drum Classic', desc:'Trommelautomat (Shopper/FIFO).', details:'Für Menüs & Frischeprodukte – klare Warenpräsentation.', features:['bis zu 180 Verkäufe/Tag empfohlen','10 Trommeln, Teller bis ~230 mm','Payment MDB/EXE'], img:'assets/gusto_drum_classic-removebg-preview.png', cat:'Snack & Food Automat' },
+      { id:'gusto-6-drum', cartId:'gusto-6-drum', displayName:'Gusto 6 Drum', title:'Gusto 6 Drum', desc:'Trommelautomat (Shopper/FIFO).', details:'Robust und zuverlässig für gekühlte Frischeprodukte.', features:['bis zu 180 Verkäufe/Tag empfohlen','10 Trommeln, Thermoglas, LED-Innenraum','Payment MDB/EXE'], img:'assets/gusto_drum-removebg-preview.png', cat:'Snack & Food Automat' },
 
-  { id:'kalea-2', cartId:'kalea-2', displayName:'Necta Kalea 2 ES + IN',
-    title:'Necta Kalea', desc:'Premium Kaffeeautomat mit optionaler Frischmilch.',
-    details:'Barista-Qualität auf Knopfdruck – für repräsentative Zonen und höhere Frequenzen.',
-    features:[
-      'ca. 150–200 Tassen/Tag (Modell/Setup)',
-      '10″ Touch, Z4000 HoReCa Brüher (14 g), optional Frischmilch',
-      'Payment vorbereitet (MDB/EXE), Zubehör: Kühlschrank/Unterschrank'
-    ],
-    img:'assets/kalea.png', cat:'Theken Automat' },
-
-  /* Kaffee Automat (Barista-Familie) */
-
-  { id:'barista-1000-touch-1bw', cartId:'barista-1000-touch-1bw', displayName:'Barista 1000 Touch 1 BW',
-    title:'Barista 1000 Touch 1 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.',
-    details:'Leistungsstarker Vollautomat mit Touchscreen für stark frequentierte Standorte.',
-    features:[
-      'bis zu 700 Becher/Tag',
-      'Z4000 Brüher, 2 Boiler, 1 Becherwerk, 13,3″ Touch',
-      'Cashless ready (MDB/EXE), integrierte Konnektivität, Breasy',
-      'Großes Bechermagazin'
-    ],
-    img:'assets/barista_1000.png', cat:'Kaffee Automat' },
-
-  { id:'barista-1000-touch-2bw', cartId:'barista-1000-touch-2bw', displayName:'Barista 1000 Touch 2 BW',
-    title:'Barista 1000 Touch 2 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.',
-    details:'Robuster Standautomat mit hohem Durchsatz.',
-    features:[
-      'bis zu 700 Becher/Tag',
-      'Z4000, 2 Boiler, 2 Becherwerke, 13,3″ Touch',
-      'Cashless ready (MDB/EXE), integrierte Konnektivität, Breasy'
-    ],
-    img:'assets/barista_1000.png', cat:'Kaffee Automat' },
-
-  { id:'barista-1000-1bw', cartId:'barista-1000-1bw', displayName:'Barista 1000 1 BW',
-    title:'Barista 1000 1 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.',
-    details:'Robuster Standautomat mit hohem Durchsatz.',
-    features:[
-      'bis zu 700 Becher/Tag',
-      'Z4000, 2 Boiler, 1 Becherwerk, Direktwahl',
-      'Cashless ready (MDB/EXE), Breasy-ready'
-    ],
-    img:'assets/barista_1000.png', cat:'Kaffee Automat' },
-
-  { id:'barista-1000-2bw', cartId:'barista-1000-2bw', displayName:'Barista 1000 2 BW',
-    title:'Barista 1000 2 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.',
-    details:'Robuster Standautomat mit hohem Durchsatz.',
-    features:[
-      'bis zu 700 Becher/Tag',
-      'Z4000, 2 Boiler, 2 Becherwerke, Direktwahl',
-      'Cashless ready (MDB/EXE), Breasy-ready'
-    ],
-    img:'assets/barista_1000.png', cat:'Kaffee Automat' },
-
-  { id:'barista-600', cartId:'barista-600', displayName:'Barista 600',
-    title:'Barista 600', desc:'Zuverlässiger Automat für mittlere bis hohe Frequenzen.',
-    details:'Bewährte Technik mit sehr guter Ausgabeleistung.',
-    features:[
-      'bis zu 600 Becher/Tag',
-      'Z4000 Brüher, 1 Boiler, große Auswahl',
-      'Cashless ready (MDB/EXE)'
-    ],
-    img:'assets/barista_600.png', cat:'Kaffee Automat' },
-
-  { id:'barista-500-touch', cartId:'barista-500-touch', displayName:'Barista 500 Touch',
-    title:'Barista 500 Touch', desc:'Großer Heißgetränkeautomat.',
-    details:'Starkes Preis-Leistungs-Verhältnis mit Touchbedienung.',
-    features:[
-      'bis zu 500 Becher/Tag',
-      'Z4000, 1 Boiler, 13,3″ Touch',
-      'Cashless ready (MDB/EXE)'
-    ],
-    img:'assets/barista_touch_500.png', cat:'Kaffee Automat' },
-
-  { id:'barista-300-touch', cartId:'barista-300-touch', displayName:'Barista 300 Touch',
-    title:'Barista 300 Touch', desc:'Solide Technik für häufige Nutzung.',
-    details:'Kompakter Standautomat mit Touchbedienung.',
-    features:[
-      'bis zu 300 Becher/Tag',
-      'Z4000, 1 Boiler, Touch',
-      'Cashless ready (MDB/EXE)'
-    ],
-    img:'assets/barista_touch_300.png', cat:'Kaffee Automat' },
-
-      // Snack & Food (später ergänzbar)
-      // { id:'snack-1', cartId:'snack-1', ... , cat:'Snack & Food Automat' },
-      
-      { id:'gusto-10', cartId:'gusto-10', displayName:'Gusto 10',
-    title:'Gusto 10', desc:'Snack & Food Automat mit hoher Kapazität.',
-    details:'Vielseitiger Automat mit ETL-Preisschildern und Vandalismusschutz.',
-    features:[
-      'bis zu 400 Verkäufe/Tag empfohlen',
-      '55 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen (Snack/Drink)',
-      'Payment MDB/EXE, Breasy-ready'
-    ],
-    img:'assets/gusto_10-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-8-lift', cartId:'gusto-8-lift', displayName:'Gusto 8 Lift',
-    title:'Gusto 8 Lift', desc:'Produktschonende Ausgabe über Lift.',
-    details:'Ideal für empfindliche Waren – sichere, sanfte Auslieferung.',
-    features:[
-      'bis zu 350 Verkäufe/Tag empfohlen',
-      'Lift-Ausgabe, bis zu 2 Temperaturzonen',
-      'Payment MDB/EXE, Vandalismusschutz'
-    ],
-    img:'assets/gusto_8_lift-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-8', cartId:'gusto-8', displayName:'Gusto 8',
-    title:'Gusto 8', desc:'Flexibler Snack/Drink Automat.',
-    details:'Kapazitive Tastatur, Thermoglas, LED-Innenraum.',
-    features:[
-      'bis zu 330 Verkäufe/Tag empfohlen',
-      '30 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen',
-      'Payment MDB/EXE, Breasy-ready'
-    ],
-    img:'assets/gusto_8-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-8-twin', cartId:'gusto-8-twin', displayName:'Gusto 8 Twin',
-    title:'Gusto 8 Twin', desc:'Kombi Snack/Flasche/Food.',
-    details:'Mehr Sortiment durch Twin-Bestückung.',
-    features:[
-      'bis zu 360 Verkäufe/Tag empfohlen',
-      '44 Wahlen; Zonen z. B. Food 0–4 °C / Snack 8–15 °C / Drink 5–8 °C',
-      'Payment MDB/EXE'
-    ],
-    img:'assets/version--gusto-8t-win.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-6-L', cartId:'gusto-6-L', displayName:'Gusto 6 L',
-    title:'Gusto 6 L', desc:'Snack & Drink mit zwei Temperaturzonen.',
-    details:'Kompakter Automat für mittelstarke Standorte.',
-    features:[
-      'bis zu 300 Verkäufe/Tag empfohlen',
-      '30 Wahlen / 6 Schubladen; 2 Zonen (z. B. 5–7 °C / 10–15 °C)',
-      'Payment MDB/EXE'
-    ],
-    img:'assets/gusto_6_L-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-6-M', cartId:'gusto-6-M', displayName:'Gusto 6 M',
-    title:'Gusto 6 M', desc:'Snack & Drink – LED-Innenraum, Fotozellen.',
-    details:'Kapazitive Tastatur, Thermoglas, optional Telemetrie.',
-    features:[
-      'bis zu 300 Verkäufe/Tag empfohlen',
-      '30 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen',
-      'Payment MDB/EXE, Breasy-ready'
-    ],
-    img:'assets/gusto_6_M-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-6-M-twin', cartId:'gusto-6-M-twin', displayName:'Gusto 6 M Twin',
-    title:'Gusto 6 M Twin', desc:'Snack/Food-Kombi mit bis zu 3 Zonen.',
-    details:'Für gemischte Waren inkl. Frischeprodukte.',
-    features:[
-      'bis zu 280 Verkäufe/Tag empfohlen',
-      '30 Wahlen / 6 Schubladen; Zonen z. B. Food 0–4 °C / Snack 8–15 °C',
-      'Payment MDB/EXE'
-    ],
-    img:'assets/gusto_6_M_twin-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-6-M-mini', cartId:'gusto-6-M-mini', displayName:'Gusto 6 Mini',
-    title:'Gusto 6 Mini', desc:'Kompakter Automat – Steuerung via Brio Touch/Solista.',
-    details:'Kleine Stellfläche, ideal als Ergänzung.',
-    features:[
-      'bis zu 170 Verkäufe/Tag empfohlen',
-      '21 Wahlen / 4 Schubladen; Snack/Flasche/Dose',
-      'Payment MDB/EXE'
-    ],
-    img:'assets/gusto_6_mini-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-6-drum-classic', cartId:'gusto-6-drum-classic', displayName:'Gusto 6 Drum Classic',
-    title:'Gusto 6 Drum Classic', desc:'Trommelautomat (Shopper/FIFO).',
-    details:'Für Menüs & Frischeprodukte – klare Warenpräsentation.',
-    features:[
-      'bis zu 180 Verkäufe/Tag empfohlen',
-      '10 Trommeln, Teller bis ~230 mm',
-      'Payment MDB/EXE'
-    ],
-    img:'assets/gusto_drum_classic-removebg-preview.png', cat:'Snack & Food Automat' },
-
-  { id:'gusto-6-drum', cartId:'gusto-6-drum', displayName:'Gusto 6 Drum',
-    title:'Gusto 6 Drum', desc:'Trommelautomat (Shopper/FIFO).',
-    details:'Robust und zuverlässig für gekühlte Frischeprodukte.',
-    features:[
-      'bis zu 180 Verkäufe/Tag empfohlen',
-      '10 Trommeln, Thermoglas, LED-Innenraum',
-      'Payment MDB/EXE'
-    ],
-    img:'assets/gusto_drum-removebg-preview.png', cat:'Snack & Food Automat' },   
-
+      { id:'kakao-apKlassicPremium-10kg', cartId:'kakao-apKlassicPremium-10kg', displayName:'AP Classic Premium Kakao 10×1kg.', title:'AP Classic Premium Kakao 10×1kg.', desc:'Feinster Premium Kakao.', details:'Lieferumfang: 10 × 1 kg Beutel. Geeignet für gängige Heißgetränkeautomaten.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/kakao_ap_klassic_premium_10kg.png', cat:'Kaffee & Getränke' },
+      { id:'creamer-apPlus-10kg', cartId:'creamer-apPlus-10kg', displayName:'AP Creamer Plus 10×1kg.', title:'AP Creamer Plus 10×1kg.', desc:'Feinstes Premium Milchpulver.', details:'Lieferumfang: 10 × 1 kg Beutel.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/kakao_ap_klassic_premium_10kg.png', cat:'Kaffee & Getränke' }
     ];
 
-    const CATS = ['Alle','Kaffee Automat','Snack & Food Automat','Theken Automat'];
+    const CATS = ['Alle','Kaffee Automat','Snack & Food Automat','Theken Automat','Kaffee & Getränke'];
 
-    /* ----------------------- ROBUSTER WARENKORB ----------------------- */
-    // Gültige cartIds aus den aktuellen Produkten
+    const APPSCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwIFKTfRWOgvXknHC2VDo-tmkoSPHPFXRWNr5QSwWMCLD1nVaPbW_HaQrUD2YhTknlHJA/exec';
+
+    window.PAYABLE_PRICES = Object.assign({}, window.PAYABLE_PRICES || {}, {
+      'kakao-apKlassicPremium-10kg': 66.15,
+      'creamer-apPlus-10kg': 44.30
+    });
+    window.PAYABLE_META = Object.assign({}, window.PAYABLE_META || {}, {
+      'kakao-apKlassicPremium-10kg': { unit: 'kg', amount: 10 },
+      'creamer-apPlus-10kg':        { unit: 'kg', amount: 10 }
+    });
+
+    window.PRODUCTS = PRODUCTS;
+    window.APPSCRIPT_ENDPOINT = APPSCRIPT_ENDPOINT;
+
     const VALID_CART_IDS = new Set(PRODUCTS.map(p => p.cartId));
+    function _readCartRaw() { try { return JSON.parse(sessionStorage.getItem('cartItems') || '[]'); } catch { return []; } }
+    function _writeCartRaw(items) { sessionStorage.setItem('cartItems', JSON.stringify(items)); }
+    function _sanitize(items) { return items.filter(id => VALID_CART_IDS.has(id)); }
+    function loadCart() { const raw=_readCartRaw(); const clean=_sanitize(raw); if(clean.length!==raw.length) _writeCartRaw(clean); return clean; }
+    function saveCart(items) { const clean=_sanitize(items); _writeCartRaw(clean); updateCount(); return clean; }
 
-    // Optional: sehr alte Keys gezielt migrieren (leer lassen = entfernen)
-    const LEGACY_CART_ID_MAP = {
-      // "necta": "kalea-2",   // Beispiel-Migration
-    };
-
-    // Rohzugriff auf Storage
-    function _readCartRaw() {
-      try { return JSON.parse(sessionStorage.getItem('cartItems') || '[]'); }
-      catch { return []; }
-    }
-    function _writeCartRaw(items) {
-      sessionStorage.setItem('cartItems', JSON.stringify(items));
-    }
-
-    // Sanitize: mappe Legacy → neue IDs, filtere Ungültige
-    function _sanitize(items) {
-      const mapped = items.map(id => LEGACY_CART_ID_MAP[id] ?? id);
-      return mapped.filter(id => VALID_CART_IDS.has(id));
-    }
-
-    // Öffentliche Cart-API – ab hier nur diese nutzen!
-    function loadCart() {
-      const raw = _readCartRaw();
-      const clean = _sanitize(raw);
-      if (clean.length !== raw.length) _writeCartRaw(clean);
-      return clean;
-    }
-    function saveCart(items) {
-      const clean = _sanitize(items);
-      _writeCartRaw(clean);
-      try { updateCount(); } catch(e){}
-      return clean;
-    }
-
-    // Einmalige Migration beim Seitenaufruf
-    (function migrateCartOnce(){
-      const raw = _readCartRaw();
-      const clean = _sanitize(raw);
-      if (clean.length !== raw.length) _writeCartRaw(clean);
-    })();
-
-    /* ----------------------- UI-Elemente ----------------------- */
     const grid = document.getElementById('grid');
-    const filters = document.getElementById('filters'); /* <— nur HIER deklariert */
+    const filters = document.getElementById('filters');
     const openCartBtn = document.getElementById('openCart');
     const closeCartBtn = document.getElementById('closeCart');
     const cartDrawer = document.getElementById('cartDrawer');
-    const cartList = document.getElementById('cartList');
-    const cartCount = document.getElementById('cartCount');
-    const askOfferBtn = document.getElementById('askOffer');
+    const cartList   = document.getElementById('cartList');
+    const cartCount  = document.getElementById('cartCount');
+    const askOfferBtn= document.getElementById('askOffer');
 
-    // Modal
     const modal = document.getElementById('productModal');
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalTitle = document.getElementById('modalTitle');
@@ -616,38 +432,52 @@ html.modal-open, body.modal-open { overflow: hidden; }
     const modalDesc = document.getElementById('modalDesc');
     const modalCat = document.getElementById('modalCategory');
     const modalFeatures = document.getElementById('modalFeatures');
-    const modalClose = document.getElementById('modalClose');
-    const modalClose2 = document.getElementById('modalClose2');
-    const modalAddBtn = document.getElementById('modalAdd');
 
-    let lastFocusedEl = null;
-    let modalProductId = null;
+    const EUR = v => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(Number(v));
 
-    /* ----------------------- Warenkorb Logik ----------------------- */
+    function unitPriceText(cartId){
+      const priceMap = window.PAYABLE_PRICES || {};
+      const metaMap  = window.PAYABLE_META   || {};
+      const price = priceMap[cartId];
+      const meta  = metaMap[cartId];
+      if (price === undefined || !meta) return '';
+      const base = price / (meta.amount);
+      return `${EUR(base)} / ${meta.unit}`;
+    }
+
+    function onlyPayable(ids){
+      const prices = (window.PAYABLE_PRICES || {});
+      return ids.length > 0 && ids.every(id => prices[id] !== undefined);
+    }
+    function updatePrepayVisibility(){
+      const btn = document.getElementById('prepayBtn');
+      if(!btn) return;
+      const items = loadCart();
+      btn.style.display = onlyPayable(items) ? '' : 'none';
+    }
+
     function countAll(){ return loadCart().length; }
     function countsMap(){ const m={}; for(const id of loadCart()){ m[id]=(m[id]||0)+1; } return m; }
     function updateCount(){ cartCount.textContent = String(countAll()); openCartBtn.setAttribute('aria-expanded', cartDrawer.style.display === 'block' ? 'true' : 'false'); }
 
     function addToCart(cartId){
-      const items = loadCart(); items.push(cartId);
-      saveCart(items); markButtons(items); renderCart();
+      const items=loadCart(); items.push(cartId);
+      saveCart(items); markButtons(items); renderCart(); updateCartTotal(); updatePrepayVisibility();
     }
     function removeOne(cartId){
-      const items = loadCart(); const idx = items.indexOf(cartId);
-      if(idx > -1){ items.splice(idx,1); saveCart(items); markButtons(items); renderCart(); }
+      const items=loadCart(); const idx=items.indexOf(cartId);
+      if(idx>-1){ items.splice(idx,1); saveCart(items); markButtons(items); renderCart(); updateCartTotal(); updatePrepayVisibility(); }
     }
     function removeAll(cartId){
-      const items = loadCart().filter(x=>x!==cartId); saveCart(items); markButtons(items); renderCart();
+      const items=loadCart().filter(x=>x!==cartId);
+      saveCart(items); markButtons(items); renderCart(); updateCartTotal(); updatePrepayVisibility();
     }
 
     function renderCart(){
-      // Sanitize bei jedem Render
-      saveCart(loadCart());
       const items = loadCart();
-
       if(items.length === 0){
         cartList.innerHTML = `<div class="empty">Ihr Warenkorb ist leer.</div>`;
-        return;
+        updateCartTotal(); updatePrepayVisibility(); return;
       }
       cartList.innerHTML = '';
       const grouped = countsMap();
@@ -655,6 +485,11 @@ html.modal-open, body.modal-open { overflow: hidden; }
       Object.entries(grouped).forEach(([cartId, qty])=>{
         const p = PRODUCTS.find(x=>x.cartId===cartId);
         if(!p) return;
+        const price = (window.PAYABLE_PRICES||{})[p.cartId];
+        const unitStr = unitPriceText(p.cartId);
+        const priceHtml = price!==undefined
+          ? `<div class="price"><span class="total">${EUR(price)}</span><span class="sub">${unitStr ? `${unitStr} · ` : ''}inkl. MwSt., <a href="versand.html">zzgl. Versand</a></span></div>`
+          : '';
         const row = document.createElement('div');
         row.className = 'cart-item';
         row.innerHTML = `
@@ -662,6 +497,7 @@ html.modal-open, body.modal-open { overflow: hidden; }
           <div class="info">
             <div class="t">${p.displayName || p.title}</div>
             <div class="d">${p.desc}</div>
+            ${priceHtml}
           </div>
           <div class="actions">
             <div class="qtywrap">
@@ -677,52 +513,320 @@ html.modal-open, body.modal-open { overflow: hidden; }
         row.querySelector('[data-remove-all]').addEventListener('click', ()=> removeAll(cartId));
         cartList.appendChild(row);
       });
+
+      updateCartTotal();
+      updatePrepayVisibility();
     }
 
-    function openCart(){ cartDrawer.style.display = 'block'; renderCart(); openCartBtn.setAttribute('aria-expanded','true'); updateCount(); }
-    function closeCart(){ cartDrawer.style.display = 'none'; openCartBtn.setAttribute('aria-expanded','false'); updateCount(); }
+    function cartTotalEUR(){
+      const map = countsMap();
+      let sum = 0;
+      for(const [id, qty] of Object.entries(map)){
+        const price = (window.PAYABLE_PRICES || {})[id];
+        if(price !== undefined) sum += price * qty;
+      }
+      return sum;
+    }
+    function updateCartTotal(){
+      const el = document.getElementById('cartTotal');
+      if(!el) return;
+      el.textContent = EUR(cartTotalEUR());
+    }
+
+    function openCart(){ cartDrawer.style.display = 'block'; renderCart(); updateCartTotal(); updateCount(); updatePrepayVisibility(); }
+    function closeCart(){ cartDrawer.style.display = 'none'; updateCount(); }
     openCartBtn.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
 
-    document.addEventListener('DOMContentLoaded', () => {
-      saveCart(loadCart());               // Start-Bereinigung
-      if(loadCart().length > 0){ openCart(); }
-    });
-
-    /* ----------------------- Angebot anfragen ----------------------- */
     askOfferBtn.addEventListener('click', ()=>{
-      saveCart(loadCart());               // letzte Bereinigung
       const items = loadCart();
-      if(items.length === 0){
-        alert('Bitte zuerst Geräte auswählen.');
-        return;
-      }
-      const counts = {};
-      for (const id of items) counts[id] = (counts[id] || 0) + 1;
-
-      const lines = Object.entries(counts).map(([cartId, qty])=>{
-        const p = PRODUCTS.find(x=>x.cartId === cartId);
-        const title = (p && (p.displayName || p.title)) || cartId;
-        return `• ${title} × ${qty}`;
+      if(items.length === 0){ alert('Bitte zuerst Produkte auswählen.'); return; }
+      const titles = items.map(id=>{
+        const p = PRODUCTS.find(x=>x.cartId===id);
+        return (p && (p.displayName || p.title)) || id;
       });
-
-      const msg = `Ausgewählte Produkte:\n${lines.join('\n')}`;
+      const msg = 'Ausgewählte Produkte:\n' + titles.map(t=>'• '+t).join('\n');
       sessionStorage.setItem('prefillOrder', msg);
       sessionStorage.setItem('contactPrefillText', msg);
       location.href = 'index.html#kontakt';
     });
 
-    /* ----------------------- Filter + Grid Rendering ----------------------- */
+    const FORM_ID = 'xblprnzl';
+    const BANK = {
+      account: "El Arvida",
+      iban: "DE12 3456 7890 1234 5678 00",
+      bic: "BANKDEFFXXX",
+      bank: "Musterbank",
+      purposePrefix: "Bestellung"
+    };
+
+    const prepayBtn = document.getElementById('prepayBtn');
+
+    const prepayConfirmModal = document.getElementById('prepayConfirmModal');
+    const prepayConfirmBackdrop = document.getElementById('prepayConfirmBackdrop');
+    const prepayConfirmClose = document.getElementById('prepayConfirmClose');
+    const prepayConfirmCancel = document.getElementById('prepayConfirmCancel');
+    const prepayConfirmBtn = document.getElementById('prepayConfirmBtn');
+    const confirmCheckbox = document.getElementById('confirmCheckbox');
+    const prepayConfirmSummary = document.getElementById('prepayConfirmSummary');
+
+    const emailInput = document.getElementById('confirmEmail');
+    const emailErr = document.getElementById('confirmEmailErr');
+    const nameInput = document.getElementById('confirmName');
+    const nameErr   = document.getElementById('confirmNameErr');
+    const phoneInput= document.getElementById('confirmPhone');
+    const phoneErr  = document.getElementById('confirmPhoneErr');
+
+    const streetInput = document.getElementById('addrStreet');
+    const streetErr   = document.getElementById('addrStreetErr');
+    const zipInput    = document.getElementById('addrZip');
+    const zipErr      = document.getElementById('addrZipErr');
+    const cityInput   = document.getElementById('addrCity');
+    const cityErr     = document.getElementById('addrCityErr');
+
+    const messageInput = document.getElementById('confirmMessage');
+
+    const prepayModal = document.getElementById('prepayModal');
+    const prepayBackdrop = document.getElementById('prepayBackdrop');
+
+    function payableLine(p, qty){
+      const price = (window.PAYABLE_PRICES||{})[p.cartId];
+      if (price === undefined) return `• ${p.displayName || p.title} × ${qty} — Preis nach Vereinbarung`;
+      return `• ${p.displayName || p.title} × ${qty} — ${EUR(price * qty)}`;
+    }
+    function buildOrderSummary(){
+      const grouped = countsMap();
+      const lines = [];
+      for (const [cartId, qty] of Object.entries(grouped)){
+        const p = PRODUCTS.find(x=>x.cartId===cartId); if(!p) continue;
+        lines.push(payableLine(p, qty));
+      }
+      const total = cartTotalEUR();
+      const orderNo = `EA-${new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14)}`;
+      return { orderNo, lines: lines.join('\n'), total };
+    }
+
+    function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v||'').trim()); }
+    function isValidPhone(v){ return /^[+()0-9\s\-/.]{6,}$/.test(String(v||'').trim()); }
+    function isValidZip(v){ return /^\d{5}$/.test(String(v||'').trim()); }
+    function notEmpty(v){ return String(v||'').trim().length > 1; }
+    function setErr(el, show){ if(el) el.style.display = show ? 'block' : 'none'; }
+
+    function updateConfirmState(){
+      const okMail = emailInput && isValidEmail(emailInput.value);
+      const okName = nameInput && notEmpty(nameInput.value);
+      const okPhone= phoneInput && isValidPhone(phoneInput.value);
+      const okStreet = streetInput && notEmpty(streetInput.value);
+      const okZip = zipInput && isValidZip(zipInput.value);
+      const okCity = cityInput && notEmpty(cityInput.value);
+      prepayConfirmBtn.disabled = !(confirmCheckbox.checked && okMail && okName && okPhone && okStreet && okZip && okCity);
+    }
+
+    function openPrepayConfirm(){
+      const items = loadCart();
+      if(items.length===0){ alert('Bitte zuerst Produkte auswählen.'); return; }
+      if(!onlyPayable(items)){ alert('Vorkasse steht nur für online bepreiste Produkte zur Verfügung.'); return; }
+
+      const {lines, total} = buildOrderSummary();
+      const txt = `Bitte prüfen Sie Ihre Bestellung:\n\n${lines}\n\nZwischensumme: ${EUR(total)}\nZahlungsart: Vorkasse und Banküberweisung`;
+      prepayConfirmSummary.textContent = txt;
+
+      const saved = JSON.parse(localStorage.getItem('customerData') || '{}');
+      if(emailInput){ emailInput.value = saved.email || ''; setErr(emailErr,false); }
+      if(nameInput){ nameInput.value = saved.name  || ''; setErr(nameErr,false); }
+      if(phoneInput){ phoneInput.value = saved.phone || ''; setErr(phoneErr,false); }
+      if(streetInput){ streetInput.value = saved.street || ''; setErr(streetErr,false); }
+      if(zipInput){ zipInput.value = saved.zip || ''; setErr(zipErr,false); }
+      if(cityInput){ cityInput.value = saved.city || ''; setErr(cityErr,false); }
+      if(messageInput){ messageInput.value = saved.message || ''; }
+
+      confirmCheckbox.checked = false;
+      updateConfirmState();
+
+      prepayConfirmModal.classList.add('show');
+      document.body.classList.add('modal-open');
+      prepayConfirmBackdrop.style.opacity='1'; prepayConfirmBackdrop.style.pointerEvents='auto';
+    }
+
+    confirmCheckbox.addEventListener('change', updateConfirmState);
+    [emailInput,nameInput,phoneInput,streetInput,zipInput,cityInput,messageInput].forEach(el=>{
+      el && el.addEventListener('input', updateConfirmState);
+    });
+
+    function closePrepayConfirm(){
+      prepayConfirmModal.classList.remove('show');
+      document.body.classList.remove('modal-open');
+      prepayConfirmBackdrop.style.opacity='0'; prepayConfirmBackdrop.style.pointerEvents='none';
+    }
+    prepayConfirmClose.addEventListener('click', closePrepayConfirm);
+    prepayConfirmCancel.addEventListener('click', closePrepayConfirm);
+    prepayConfirmBackdrop.addEventListener('click', closePrepayConfirm);
+
+    async function sendOrderEmail(orderNo, prefill, payload){
+      try{
+        const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
+          method:'POST',
+          headers:{'Accept':'application/json','Content-Type':'application/json'},
+          body: JSON.stringify({
+            _subject: `Vorkasse Bestellung ${orderNo}`,
+            message: prefill,
+            _replyto: payload.email,
+            email: payload.email,
+            name: payload.name,
+            phone: payload.phone,
+            street: payload.street,
+            zip: payload.zip,
+            city: payload.city,
+            address: `${payload.street}\n${payload.zip} ${payload.city}`,
+            customer_message: payload.message || '',
+            source: 'shop-prepay'
+          })
+        });
+        return res.ok;
+      }catch(e){ return false; }
+    }
+
+    async function finalizePrepay(){
+      const mail = (emailInput?.value || '').trim();
+      const name = (nameInput?.value || '').trim();
+      const phone= (phoneInput?.value || '').trim();
+      const street = (streetInput?.value || '').trim();
+      const zip = (zipInput?.value || '').trim();
+      const city = (cityInput?.value || '').trim();
+      const note = (messageInput?.value || '').trim();
+
+      const mailOk = isValidEmail(mail);
+      const nameOk = notEmpty(name);
+      const phoneOk= isValidPhone(phone);
+      const streetOk = notEmpty(street);
+      const zipOk = isValidZip(zip);
+      const cityOk = notEmpty(city);
+
+      setErr(emailErr, !mailOk);
+      setErr(nameErr,  !nameOk);
+      setErr(phoneErr, !phoneOk);
+      setErr(streetErr, !streetOk);
+      setErr(zipErr, !zipOk);
+      setErr(cityErr, !cityOk);
+
+      if(!(mailOk && nameOk && phoneOk && streetOk && zipOk && cityOk)){
+        const firstInvalid = !mailOk ? emailInput : !nameOk ? nameInput : !phoneOk ? phoneInput : !streetOk ? streetInput : !zipOk ? zipInput : cityInput;
+        firstInvalid?.focus();
+        return;
+      }
+
+      localStorage.setItem('customerData', JSON.stringify({ email:mail, name, phone, street, zip, city, message:note }));
+
+      const {orderNo, lines, total} = buildOrderSummary();
+      const summary = `Bestellnummer: ${orderNo}
+      
+Kunde:
+Name: ${name}
+E-Mail: ${mail}
+Telefon: ${phone}
+Lieferadresse:
+${street}
+${zip} ${city}
+${note ? `\nNachricht des Kunden:\n${note}\n` : ''} 
+Artikel:
+${lines}
+
+Zwischensumme: ${EUR(total)}
+Zahlungsart: Vorkasse und Banküberweisung`;
+
+      document.getElementById('bkName').textContent = BANK.account;
+      document.getElementById('bkIban').textContent = BANK.iban;
+      document.getElementById('bkBic').textContent  = BANK.bic;
+      document.getElementById('bkBank').textContent = BANK.bank;
+      document.getElementById('bkPurpose').textContent = `${BANK.purposePrefix} ${orderNo}`;
+      document.getElementById('prepaySummary').textContent = summary;
+
+      const prefill = `${summary}
+
+Bankverbindung:
+${BANK.account}
+IBAN: ${BANK.iban}
+BIC: ${BANK.bic}
+Bank: ${BANK.bank}
+Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
+
+      sessionStorage.setItem('prefillOrder', prefill);
+      sessionStorage.setItem('contactPrefillText', prefill);
+
+      sendOrderEmail(orderNo, prefill, {email:mail, name, phone, street, zip, city, message:note})
+        .then(ok => {
+          const ms = document.getElementById('mailStatus');
+          if(ok) { if(ms && !ms.textContent) ms.textContent = 'Bestätigung wird per E-Mail versendet.'; }
+          else   { if(ms && !ms.textContent) ms.textContent = 'Hinweis: E-Mail konnte nicht versendet werden. Bitte Kontaktformular nutzen.'; }
+        });
+
+      try {
+        const payload = {
+          to: mail,
+          name,
+          phone,
+          street,
+          zip,
+          city,
+          note,
+          items: lines,
+          total: EUR(total),
+          orderNo,
+          bank: {
+            account: BANK.account,
+            iban: BANK.iban,
+            bic: BANK.bic,
+            bank: BANK.bank,
+            purpose: `${BANK.purposePrefix} ${orderNo}`
+          }
+        };
+        fetch(APPSCRIPT_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const ms = document.getElementById('mailStatus');
+        if(ms && !ms.textContent) ms.textContent = 'Bestätigung wird per E-Mail versendet.';
+      } catch(e) {}
+
+      closePrepayConfirm();
+      prepayModal.classList.add('show'); document.body.classList.add('modal-open');
+      prepayBackdrop.style.opacity='1'; prepayBackdrop.style.pointerEvents='auto';
+
+      try{ await navigator.clipboard.writeText(prefill); }catch(e){}
+      sessionStorage.removeItem('cartItems');
+      renderCart(); updateCartTotal(); updateCount(); updatePrepayVisibility();
+    }
+
+    document.getElementById('prepayClose').addEventListener('click', function(){
+      prepayModal.classList.remove('show');
+      document.body.classList.remove('modal-open');
+      prepayBackdrop.style.opacity='0'; prepayBackdrop.style.pointerEvents='none';
+    });
+    prepayBackdrop.addEventListener('click', function(){
+      prepayModal.classList.remove('show');
+      document.body.classList.remove('modal-open');
+      prepayBackdrop.style.opacity='0'; prepayBackdrop.style.pointerEvents='none';
+    });
+    document.getElementById('prepayCopy').addEventListener('click', async ()=>{
+      const txt = document.getElementById('prepaySummary').textContent;
+      try{ await navigator.clipboard.writeText(txt); alert('Daten kopiert.'); }catch(e){}
+    });
+    document.getElementById('prepayGoto').addEventListener('click', ()=> location.href='index.html#kontakt');
+
+    prepayBtn.addEventListener('click', openPrepayConfirm);
+    prepayConfirmBtn.addEventListener('click', finalizePrepay);
+
     function chip(label, active){
       const b = document.createElement('button');
       b.type='button'; b.className='chip'+(active?' active':''); b.textContent=label;
       b.addEventListener('click', ()=>{
         document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-        b.addEventListener
         b.classList.add('active');
         render(label);
         window.scrollTo({top:document.getElementById('shop').offsetTop - 20, behavior:'smooth'});
-      }, {once:false});
+      });
       return b;
     }
     CATS.forEach((c,i)=>filters.appendChild(chip(c, i===0)));
@@ -735,6 +839,7 @@ html.modal-open, body.modal-open { overflow: hidden; }
         if(category==='Kaffee Automat') return p.cat==='Kaffee Automat';
         if(category==='Snack & Food Automat') return p.cat==='Snack & Food Automat';
         if(category==='Theken Automat') return p.cat==='Theken Automat';
+        if(category==='Kaffee & Getränke') return p.cat==='Kaffee & Getränke';
         return true;
       });
 
@@ -749,10 +854,22 @@ html.modal-open, body.modal-open { overflow: hidden; }
             <button class="btn secondary select-btn" data-cart="${p.cartId}" aria-pressed="false">Auswählen</button>
           </div>
         `;
-        // Bild & Titel -> Detailmodal (eindeutige id!)
+
+        const price = (window.PAYABLE_PRICES || {})[p.cartId];
+        if (price !== undefined) {
+          const unitStr = unitPriceText(p.cartId);
+          const priceEl = document.createElement('div');
+          priceEl.className = 'price';
+          priceEl.innerHTML = `
+            <span class="total">${EUR(price)}</span>
+            <span class="sub">${unitStr ? `${unitStr} · ` : ''}inkl. MwSt., <a href="versand.html">zzgl. Versand</a></span>
+          `;
+          card.querySelector('.desc').insertAdjacentElement('afterend', priceEl);
+          card.classList.add('has-price');
+        }
+
         card.querySelectorAll('[data-detail]').forEach(el=>el.addEventListener('click', ()=> openProductModal(p.id)));
-        // Button -> in den Warenkorb (cartId)
-        card.querySelector('[data-cart]').addEventListener('click', ()=> { addToCart(p.cartId); openCart(); });
+        card.querySelector('[data-cart]').addEventListener('click', ()=>{ addToCart(p.cartId); openCart(); });
         grid.appendChild(card);
       });
 
@@ -769,62 +886,161 @@ html.modal-open, body.modal-open { overflow: hidden; }
       });
     }
 
-    /* ----------------------- Produkt-Detail-Modal ----------------------- */
     function openProductModal(id){
-      const p = PRODUCTS.find(x=>x.id===id); // eindeutige id ⇒ korrektes Produkt
-      if(!p) return;
-      modalProductId = id;
+      const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
       modalTitle.textContent = p.title;
       modalImg.src = p.img; modalImg.alt = p.title;
       modalDesc.textContent = p.details || p.desc || '';
       modalCat.textContent = p.cat ? `Kategorie: ${p.cat}` : '';
       modalFeatures.innerHTML = (p.features||[]).map(f=>`<li>${f}</li>`).join('');
-      lastFocusedEl = document.activeElement;
-      modal.classList.add('show'); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false');
-      modalAddBtn.onclick = ()=>{ addToCart(p.cartId); openCart(); closeProductModal(); };
-      modalAddBtn.focus();
-      document.documentElement.classList.add("modal-open");
-      document.body.classList.add("modal-open");
+      document.getElementById('productModal').classList.add('show');
+      document.body.classList.add('modal-open');
+      document.getElementById('modalAdd').onclick = ()=>{ addToCart(p.cartId); openCart(); closeProductModal(); };
+      document.getElementById('modalAdd').focus();
     }
     function closeProductModal(){
-      modal.classList.remove('show');
-      document.documentElement.classList.remove('modal-open');
+      document.getElementById('productModal').classList.remove('show');
       document.body.classList.remove('modal-open');
-      modal.setAttribute('aria-hidden','true');
-      if(lastFocusedEl) lastFocusedEl.focus();
     }
     document.getElementById('modalClose').addEventListener('click', closeProductModal);
     document.getElementById('modalClose2').addEventListener('click', closeProductModal);
     document.getElementById('modalBackdrop').addEventListener('click', closeProductModal);
-    window.addEventListener('keydown', e=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeProductModal(); });
-    
+    window.addEventListener('keydown', e=>{ if(e.key==='Escape' && document.getElementById('productModal').classList.contains('show')) closeProductModal(); });
 
-    /* Start */
-    render('Alle'); updateCount();
+    render('Alle'); updateCount(); updatePrepayVisibility();
+    if(loadCart().length > 0){ openCart(); }
   </script>
 
+  <script src="https://www.paypal.com/sdk/js?client-id=AV5VSF_wvI4eyzAN94z0407RphkMdDk5hf6C43qxVXZxdsKa2yz9dhpox_pgBWPVUSnxM8op7fvH2QWS&currency=EUR&intent=CAPTURE&locale=de_DE" data-namespace="paypal_sdk"></script>
   <script>
-  // Fallback wenn sticky fehlt und kleiner Schatten beim Scrollen
   (function(){
-    var header = document.querySelector('.site-header');
-    if(!header) return;
-    var stickyOk = CSS && (CSS.supports('position','sticky') || CSS.supports('position','-webkit-sticky'));
-    if(!stickyOk && window.matchMedia('(max-width:768px)').matches){
-      header.style.position = 'fixed';
-      header.style.top = '0';
-      header.style.left = '0';
-      header.style.right = '0';
-      document.body.style.paddingTop = getComputedStyle(header).getPropertyValue('min-height') || '72px';
+    function readCart(){ try { return JSON.parse(sessionStorage.getItem('cartItems') || '[]'); } catch { return []; } }
+    function countMap(arr){ const m={}; for(const id of arr){ m[id]=(m[id]||0)+1; } return m; }
+    function onlyPayable(ids){ return ids.length>0 && ids.every(id => window.PAYABLE_PRICES && window.PAYABLE_PRICES[id] !== undefined); }
+    function totalEUR(ids){ const m=countMap(ids); let t=0; for(const [id,q] of Object.entries(m)){ t+=(window.PAYABLE_PRICES[id]||0)*q; } return Number(t.toFixed(2)); }
+
+    function itemsForPayload(ids){
+      const m = countMap(ids);
+      const out = [];
+      for(const [id, qty] of Object.entries(m)){
+        const p = (window.PRODUCTS || []).find(x => x.cartId === id);
+        out.push({
+          title: p ? (p.displayName || p.title) : id,
+          qty: qty,
+          price: String((window.PAYABLE_PRICES || {})[id] ?? '')
+        });
+      }
+      return out;
     }
-    var last = 0;
-    window.addEventListener('scroll', function(){
-      var y = window.pageYOffset || document.documentElement.scrollTop;
-      if(y > 2 && !header.classList.contains('is-scrolled')) header.classList.add('is-scrolled');
-      else if(y <= 2 && header.classList.contains('is-scrolled')) header.classList.remove('is-scrolled');
-      last = y;
-    }, {passive:true});
+
+    function buildButtonConfig(items, hintEl){
+      return {
+        style: { layout:'vertical', shape:'rect', label:'paypal' },
+        createOrder: function(data, actions){
+          var amount = totalEUR(items);
+          return actions.order.create({
+            intent: 'CAPTURE',
+            purchase_units: [{ amount: { currency_code:'EUR', value: amount.toFixed(2) } }]
+          });
+        },
+        onApprove: async function(data, actions){
+          const details = await actions.order.capture();
+
+          try{
+            const unit = (details.purchase_units && details.purchase_units[0]) || {};
+            const shipping = (unit.shipping && unit.shipping.address) || {};
+            const buyerName = (unit.shipping && unit.shipping.name && unit.shipping.name.full_name) || '';
+            const buyerEmail = (details.payer && details.payer.email_address) || '';
+
+            const payload = {
+              type: 'order',
+              order: {
+                id: details.id,
+                amount: unit.amount && unit.amount.value || '',
+                currency: unit.amount && unit.amount.currency_code || 'EUR',
+                status: details.status || ''
+              },
+              buyer: { name: buyerName, email: buyerEmail },
+              shipping: {
+                name: buyerName,
+                line1: shipping.address_line_1 || '',
+                line2: shipping.address_line_2 || '',
+                postal_code: shipping.postal_code || '',
+                city: shipping.admin_area_2 || '',
+                country_code: shipping.country_code || 'DE'
+              },
+              items: itemsForPayload(items)
+            };
+
+            fetch(window.APPSCRIPT_ENDPOINT || '', {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          }catch(e){}
+
+          sessionStorage.removeItem('cartItems');
+          if(hintEl) hintEl.textContent = 'Zahlung erfolgreich. Die Bestellbestätigung wurde per E-Mail versendet.';
+          try{ window.dispatchEvent(new Event('storage')); }catch(e){}
+        },
+        onCancel: function(){
+          if(hintEl) hintEl.textContent = 'Zahlung abgebrochen.';
+        },
+        onError: function(err){
+          console.error(err);
+          if(hintEl) hintEl.textContent = 'PayPal Fehler. Bitte später erneut versuchen.';
+        }
+      };
+    }
+
+    function mountPayPal(){
+      var area  = document.getElementById('paypalArea');
+      var card  = document.getElementById('cardArea');
+      var hint  = document.getElementById('paypalHint');
+      if(!area) return;
+
+      area.innerHTML = '';
+      if(card) card.innerHTML = '';
+      if(hint) hint.textContent = '';
+
+      var items = readCart();
+      if(!onlyPayable(items)){
+        if(hint && items.length>0) hint.textContent = 'Zahlarten erscheinen automatisch, sobald nur online zahlbare Produkte im Warenkorb liegen.';
+        return;
+      }
+
+      var pp = (window.paypal_sdk || window.paypal);
+      if(!pp || !pp.Buttons){
+        if(hint) hint.textContent = 'PayPal konnte nicht geladen werden.';
+        return;
+      }
+
+      var cfg = buildButtonConfig(items, hint);
+
+      pp.Buttons(cfg).render('#paypalArea');
+
+      try{
+        if(pp.FUNDING && pp.FUNDING.CARD && card){
+          var cardCfg = Object.assign({}, cfg, { style: { layout:'vertical', shape:'rect', label:'pay' }, fundingSource: pp.FUNDING.CARD });
+          var cardButtons = pp.Buttons(cardCfg);
+          if(cardButtons.isEligible()){
+            cardButtons.render('#cardArea');
+          }
+        }
+      }catch(e){}
+    }
+
+    try{
+      if(typeof window.saveCart === 'function'){
+        var _orig = window.saveCart;
+        window.saveCart = function(items){ var r = _orig(items); try{ mountPayPal(); }catch(e){} return r; };
+      }
+    }catch(e){}
+    document.addEventListener('DOMContentLoaded', function(){ try{ mountPayPal(); }catch(e){} });
+    setInterval(function(){ try{ mountPayPal(); }catch(e){} }, 1500);
   })();
-</script>
+  </script>
 
 </body>
 </html>

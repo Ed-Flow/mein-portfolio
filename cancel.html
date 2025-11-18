@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zahlung abgebrochen – El Arvida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{ --brown:#6b4637; --brown-deep:#533528; --accent:#ffe6cc; --text:#222; --header-h:72px; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.65; color:var(--text);
+      background: radial-gradient(1400px 900px at 80% -200px, rgba(255,230,204,.35), transparent 60%),
+                 radial-gradient(1000px 700px at -10% 40%, rgba(255,255,255,.35), transparent 55%),
+                 linear-gradient(180deg, #f9f6f1 0%, #f1e8df 100%); }
+    .site-header{
+      position:sticky; top:0; z-index:1000;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(0deg, color-mix(in oklab, var(--brown) 92%, transparent), var(--brown-deep));
+      backdrop-filter:saturate(140%) blur(8px);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 30px rgba(0,0,0,.12); color:#fff;
+    }
+    .header-bar{ display:flex; align-items:center; justify-content:center; min-height:var(--header-h); padding:0 16px; }
+    .primary-nav{ display:flex; gap:32px; align-items:center; justify-content:center; }
+    .primary-nav a{ color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem; padding:10px 14px; border-radius:10px; opacity:.95; }
+    .primary-nav a:hover{ background:rgba(255,255,255,.10); opacity:1; }
+    .container{max-width:900px; margin:0 auto; padding:24px 16px 60px;}
+    main{padding-top:var(--header-h);}
+    .card{background:#fff; border:1px solid #eadfd4; border-radius:14px; box-shadow:0 8px 22px rgba(0,0,0,.07); overflow:hidden;}
+    .card .head{padding:22px 18px; border-bottom:1px solid #eee;}
+    .card .content{padding:16px 18px 22px;}
+    h1{margin:0; font-size:clamp(26px,3vw,34px); font-weight:900; color:#101010;}
+    .warn{display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border-radius:999px; background:#fff0e6; color:#7a3b00; font-weight:800; font-size:.95rem;}
+    .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:10px; background:var(--brown); color:#fff; font-weight:900; text-decoration:none; border:2px solid var(--brown); }
+    .btn.secondary{background:#fff; color:#4b362f}
+    .row{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    footer{text-align:center; padding:20px; background:#eee; margin-top:40px; font-size:.9rem}
+    footer a{color:#333; text-decoration:none; font-weight:700;}
+    footer a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-bar">
+      <nav class="primary-nav" aria-label="Hauptnavigation">
+        <a href="index.html#start">Startseite</a>
+        <a href="index.html#leistungen">Leistungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="shop.html" class="is-active">Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <div class="head">
+          <h1>Zahlung abgebrochen</h1>
+        </div>
+        <div class="content">
+          <p class="warn">Die Zahlung wurde abgebrochen oder nicht abgeschlossen.</p>
+          <p>Dein Warenkorb bleibt erhalten. Du kannst es erneut versuchen, eine andere Zahlungsart wählen oder uns bei Fragen kurz schreiben.</p>
+          <div class="row">
+            <a class="btn" href="shop.html">Zurück zum Warenkorb</a>
+            <a class="btn secondary" href="index.html#kontakt">Kontakt aufnehmen</a>
+          </div>
+          <p style="margin-top:14px;color:#6a5a54;font-size:.95rem">Tipp: Wenn du Probleme mit PayPal hast, versuche es später noch einmal oder wähle Vorkasse.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 El Arvida – Alle Rechte vorbehalten · 
+    <a href="impressum.html">Impressum</a> · 
+    <a href="datenschutz.html">Datenschutz</a> · 
+    <a href="agb.html">AGB</a> · 
+    <a href="widerruf.html">Widerruf</a>
+  </footer>
+</body>
+</html>
