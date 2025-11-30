@@ -211,6 +211,14 @@
     <div class="cart-list" id="cartList"></div>
     <div class="line"></div>
     <div class="bottom">
+      <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-weight:800">
+        <span>Zwischensumme</span>
+        <span id="cartSubtotal">0,00 €</span>
+      </div>
+      <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span>Versand</span>
+        <span id="cartShipping">0,00 €</span>
+      </div>
       <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:900">
         <span>Gesamt</span>
         <span id="cartTotal">0,00 €</span>
@@ -376,7 +384,7 @@
       { id:'barista-1000-2bw', cartId:'barista-1000-2bw', displayName:'Barista 1000 2 BW', title:'Barista 1000 2 BW', desc:'Großer Heißgetränkeautomat für Standorte mit hoher Frequenz.', details:'Robuster Standautomat mit hohem Durchsatz.', features:['bis zu 700 Becher/Tag','Z4000, 2 Boiler, 2 Becherwerke, Direktwahl','Cashless ready (MDB/EXE), Breasy-ready'], img:'assets/barista_1000.png', cat:'Kaffee Automat' },
       { id:'barista-600', cartId:'barista-600', displayName:'Barista 600', title:'Barista 600', desc:'Zuverlässiger Automat für mittlere bis hohe Frequenzen.', details:'Bewährte Technik mit sehr guter Ausgabeleistung.', features:['bis zu 600 Becher/Tag','Z4000 Brüher, 1 Boiler, große Auswahl','Cashless ready (MDB/EXE)'], img:'assets/barista_600.png', cat:'Kaffee Automat' },
       { id:'barista-500-touch', cartId:'barista-500-touch', displayName:'Barista 500 Touch', title:'Barista 500 Touch', desc:'Großer Heißgetränkeautomat.', details:'Starkes Preis-Leistungs-Verhältnis mit Touchbedienung.', features:['bis zu 500 Becher/Tag','Z4000, 1 Boiler, 13,3″ Touch','Cashless ready (MDB/EXE)'], img:'assets/barista_touch_500.png', cat:'Kaffee Automat' },
-      { id:'barista-300-touch', cartId:'barista-300-touch', displayName:'Barista 300 Touch', title:'Barista 300 Touch', desc:'Solide Technik für häufige Nutzung.', details:'Kompakter Standautomat mit Touchbedienung.', features:['bis zu 300 Becher/Tag','Z4000, 1 Boiler, Touch','Cashless ready (MDB/EXE)'], img:'assets/barista_touch_300.png', cat:'Kaffee Automat' },
+      { id:'barista-300-touch', cartId:'barista-300-touch', displayName:'Barista 300 Touch', title:'Barista 300 Touch', desc:'Solide Technik für häufige Nutzung.', details:'Kompakter Standautomat mit Touchbedienung.', features:['bis zu 300 Becher/Tag','Z4000, 1 Boiler, Touch'], img:'assets/barista_touch_300.png', cat:'Kaffee Automat' },
 
       { id:'gusto-10', cartId:'gusto-10', displayName:'Gusto 10', title:'Gusto 10', desc:'Snack & Food Automat mit hoher Kapazität.', details:'Vielseitiger Automat mit ETL-Preisschildern und Vandalismusschutz.', features:['bis zu 400 Verkäufe/Tag empfohlen','55 Wahlen / 6 Schubladen; bis zu 2 Temperaturzonen (Snack/Drink)','Payment MDB/EXE, Breasy-ready'], img:'assets/gusto_10-removebg-preview.png', cat:'Snack & Food Automat' },
       { id:'gusto-8-lift', cartId:'gusto-8-lift', displayName:'Gusto 8 Lift', title:'Gusto 8 Lift', desc:'Produktschonende Ausgabe über Lift.', details:'Ideal für empfindliche Waren – sichere, sanfte Auslieferung.', features:['bis zu 350 Verkäufe/Tag empfohlen','Lift-Ausgabe, bis zu 2 Temperaturzonen','Payment MDB/EXE, Vandalismusschutz'], img:'assets/gusto_8_lift-removebg-preview.png', cat:'Snack & Food Automat' },
@@ -389,22 +397,35 @@
       { id:'gusto-6-drum-classic', cartId:'gusto-6-drum-classic', displayName:'Gusto 6 Drum Classic', title:'Gusto 6 Drum Classic', desc:'Trommelautomat (Shopper/FIFO).', details:'Für Menüs & Frischeprodukte – klare Warenpräsentation.', features:['bis zu 180 Verkäufe/Tag empfohlen','10 Trommeln, Teller bis ~230 mm','Payment MDB/EXE'], img:'assets/gusto_drum_classic-removebg-preview.png', cat:'Snack & Food Automat' },
       { id:'gusto-6-drum', cartId:'gusto-6-drum', displayName:'Gusto 6 Drum', title:'Gusto 6 Drum', desc:'Trommelautomat (Shopper/FIFO).', details:'Robust und zuverlässig für gekühlte Frischeprodukte.', features:['bis zu 180 Verkäufe/Tag empfohlen','10 Trommeln, Thermoglas, LED-Innenraum','Payment MDB/EXE'], img:'assets/gusto_drum-removebg-preview.png', cat:'Snack & Food Automat' },
 
-      { id:'kakao-apKlassicPremium-10kg', cartId:'kakao-apKlassicPremium-10kg', displayName:'AP Classic Premium Kakao 10×1kg.', title:'AP Classic Premium Kakao 10×1kg.', desc:'Feinster Premium Kakao.', details:'Lieferumfang: 10 × 1 kg Beutel. Geeignet für gängige Heißgetränkeautomaten.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/kakao_ap_klassic_premium_10kg.png', cat:'Kaffee & Getränke' },
-      { id:'creamer-apPlus-10kg', cartId:'creamer-apPlus-10kg', displayName:'AP Creamer Plus 10×1kg.', title:'AP Creamer Plus 10×1kg.', desc:'Feinstes Premium Milchpulver.', details:'Lieferumfang: 10 × 1 kg Beutel.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/kakao_ap_klassic_premium_10kg.png', cat:'Kaffee & Getränke' }
+      { id:'kakao-apKlassicPremium-10kg', cartId:'kakao-apKlassicPremium-10kg', displayName:'AP Classic Premium Kakao 10×1kg.', title:'AP Classic Premium Kakao 10×1kg', desc:'Feinster Premium Kakao.', details:'Lieferumfang: 10 × 1 kg Beutel. Geeignet für gängige Heißgetränkeautomaten.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/kakao_ap_klassic_premium_10kg.png', cat:'Kaffee & Getränke' },
+      { id:'creamer-apPlus-10kg', cartId:'creamer-apPlus-10kg', displayName:'AP Creamer Plus 10×1kg.', title:'AP Creamer Plus 10×1kg', desc:'Feinstes Premium Milchpulver.', details:'Lieferumfang: 10 × 1 kg Beutel.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/creamer-apPlus-10kg.png', cat:'Kaffee & Getränke' },
+      { id:'caprimo-irish-10kg', cartId:'caprimo-irish-10kg', displayName:'Caprimo Irish Cappuccino 10x1kg.', title:'Caprimo Irish Cappuccino 10x1kg', desc:'Feinstes Premium Milchpulver.', details:'Lieferumfang: 10 × 1 kg Beutel.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/caprimo-irish-10kg.png', cat:'Kaffee & Getränke' },
+      { id:'caprimo-caramel-10kg', cartId:'caprimo-caramel-10kg', displayName:'Caprimo Cappuccino Caramel 10x1kg.', title:'Caprimo Cappuccino Caramel 10x1kg', desc:'Feinstes Premium Milchpulver.', details:'Lieferumfang: 10 × 1 kg Beutel.', features:['10 × 1 kg','Instantpulver, löslich','Für Automaten geeignet'], img:'assets/caprimo-caramel-10kg.png', cat:'Kaffee & Getränke' },
     ];
 
     const CATS = ['Alle','Kaffee Automat','Snack & Food Automat','Theken Automat','Kaffee & Getränke'];
 
     const APPSCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwIFKTfRWOgvXknHC2VDo-tmkoSPHPFXRWNr5QSwWMCLD1nVaPbW_HaQrUD2YhTknlHJA/exec';
 
+    // ✔ Preislisten (zahlbare Produkte)
     window.PAYABLE_PRICES = Object.assign({}, window.PAYABLE_PRICES || {}, {
       'kakao-apKlassicPremium-10kg': 66.15,
-      'creamer-apPlus-10kg': 44.30
+      'creamer-apPlus-10kg': 44.30,
+      'caprimo-irish-10kg': 79.40,
+      'caprimo-caramel-10kg': 74.40,
     });
     window.PAYABLE_META = Object.assign({}, window.PAYABLE_META || {}, {
       'kakao-apKlassicPremium-10kg': { unit: 'kg', amount: 10 },
-      'creamer-apPlus-10kg':        { unit: 'kg', amount: 10 }
+      'creamer-apPlus-10kg':        { unit: 'kg', amount: 10 },
+      'caprimo-irish-10kg':         { unit: 'kg', amount: 10 },
+      'caprimo-caramel-10kg':       { unit: 'kg', amount: 10 },
     });
+
+    // ✔ Versandkonfiguration – hier anpassen
+    const SHIPPING = {
+      flat: 5.90,       // Pauschale pro Bestellung
+      freeFrom: 150.00  // ab diesem Warenwert versandkostenfrei (optional)
+    };
 
     window.PRODUCTS = PRODUCTS;
     window.APPSCRIPT_ENDPOINT = APPSCRIPT_ENDPOINT;
@@ -445,6 +466,17 @@
       return `${EUR(base)} / ${meta.unit}`;
     }
 
+    function shippingFee(subtotal){
+      const s = SHIPPING || {};
+      if (s.freeFrom != null && subtotal >= s.freeFrom) return 0;
+      return Number(s.flat || 0);
+    }
+    function shippingInfoText(){
+      const s = SHIPPING || {};
+      if (s.freeFrom != null) return `pauschal ${EUR(s.flat||0)} (ab ${EUR(s.freeFrom)} gratis)`;
+      return `pauschal ${EUR(s.flat||0)}`;
+    }
+
     function onlyPayable(ids){
       const prices = (window.PAYABLE_PRICES || {});
       return ids.length > 0 && ids.every(id => prices[id] !== undefined);
@@ -462,22 +494,22 @@
 
     function addToCart(cartId){
       const items=loadCart(); items.push(cartId);
-      saveCart(items); markButtons(items); renderCart(); updateCartTotal(); updatePrepayVisibility();
+      saveCart(items); markButtons(items); renderCart(); updateCartTotals(); updatePrepayVisibility();
     }
     function removeOne(cartId){
       const items=loadCart(); const idx=items.indexOf(cartId);
-      if(idx>-1){ items.splice(idx,1); saveCart(items); markButtons(items); renderCart(); updateCartTotal(); updatePrepayVisibility(); }
+      if(idx>-1){ items.splice(idx,1); saveCart(items); markButtons(items); renderCart(); updateCartTotals(); updatePrepayVisibility(); }
     }
     function removeAll(cartId){
       const items=loadCart().filter(x=>x!==cartId);
-      saveCart(items); markButtons(items); renderCart(); updateCartTotal(); updatePrepayVisibility();
+      saveCart(items); markButtons(items); renderCart(); updateCartTotals(); updatePrepayVisibility();
     }
 
     function renderCart(){
       const items = loadCart();
       if(items.length === 0){
         cartList.innerHTML = `<div class="empty">Ihr Warenkorb ist leer.</div>`;
-        updateCartTotal(); updatePrepayVisibility(); return;
+        updateCartTotals(); updatePrepayVisibility(); return;
       }
       cartList.innerHTML = '';
       const grouped = countsMap();
@@ -514,11 +546,11 @@
         cartList.appendChild(row);
       });
 
-      updateCartTotal();
+      updateCartTotals();
       updatePrepayVisibility();
     }
 
-    function cartTotalEUR(){
+    function cartSubtotalEUR(){
       const map = countsMap();
       let sum = 0;
       for(const [id, qty] of Object.entries(map)){
@@ -527,13 +559,22 @@
       }
       return sum;
     }
-    function updateCartTotal(){
-      const el = document.getElementById('cartTotal');
-      if(!el) return;
-      el.textContent = EUR(cartTotalEUR());
+    function updateCartTotals(){
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const shipEl     = document.getElementById('cartShipping');
+      const totalEl    = document.getElementById('cartTotal');
+      if(!subtotalEl || !shipEl || !totalEl) return;
+
+      const subtotal = cartSubtotalEUR();
+      const ship = shippingFee(subtotal);
+      const total = subtotal + ship;
+
+      subtotalEl.textContent = EUR(subtotal);
+      shipEl.textContent = EUR(ship);
+      totalEl.textContent = EUR(total);
     }
 
-    function openCart(){ cartDrawer.style.display = 'block'; renderCart(); updateCartTotal(); updateCount(); updatePrepayVisibility(); }
+    function openCart(){ cartDrawer.style.display = 'block'; renderCart(); updateCartTotals(); updateCount(); updatePrepayVisibility(); }
     function closeCart(){ cartDrawer.style.display = 'none'; updateCount(); }
     openCartBtn.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
@@ -601,9 +642,11 @@
         const p = PRODUCTS.find(x=>x.cartId===cartId); if(!p) continue;
         lines.push(payableLine(p, qty));
       }
-      const total = cartTotalEUR();
+      const subtotal = cartSubtotalEUR();
+      const ship = shippingFee(subtotal);
+      const total = subtotal + ship;
       const orderNo = `EA-${new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14)}`;
-      return { orderNo, lines: lines.join('\n'), total };
+      return { orderNo, lines: lines.join('\n'), subtotal, ship, total };
     }
 
     function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v||'').trim()); }
@@ -627,8 +670,8 @@
       if(items.length===0){ alert('Bitte zuerst Produkte auswählen.'); return; }
       if(!onlyPayable(items)){ alert('Vorkasse steht nur für online bepreiste Produkte zur Verfügung.'); return; }
 
-      const {lines, total} = buildOrderSummary();
-      const txt = `Bitte prüfen Sie Ihre Bestellung:\n\n${lines}\n\nZwischensumme: ${EUR(total)}\nZahlungsart: Vorkasse und Banküberweisung`;
+      const {lines, subtotal, ship, total} = buildOrderSummary();
+      const txt = `Bitte prüfen Sie Ihre Bestellung:\n\n${lines}\n\nZwischensumme: ${EUR(subtotal)}\nVersand: ${EUR(ship)}\nGesamt: ${EUR(total)}\nZahlungsart: Vorkasse und Banküberweisung`;
       prepayConfirmSummary.textContent = txt;
 
       const saved = JSON.parse(localStorage.getItem('customerData') || '{}');
@@ -717,7 +760,7 @@
 
       localStorage.setItem('customerData', JSON.stringify({ email:mail, name, phone, street, zip, city, message:note }));
 
-      const {orderNo, lines, total} = buildOrderSummary();
+      const {orderNo, lines, subtotal, ship, total} = buildOrderSummary();
       const summary = `Bestellnummer: ${orderNo}
       
 Kunde:
@@ -731,7 +774,9 @@ ${note ? `\nNachricht des Kunden:\n${note}\n` : ''}
 Artikel:
 ${lines}
 
-Zwischensumme: ${EUR(total)}
+Zwischensumme: ${EUR(subtotal)}
+Versand: ${EUR(ship)}
+Gesamt: ${EUR(total)}
 Zahlungsart: Vorkasse und Banküberweisung`;
 
       document.getElementById('bkName').textContent = BANK.account;
@@ -770,6 +815,8 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
           city,
           note,
           items: lines,
+          subtotal: EUR(subtotal),
+          shipping: EUR(ship),
           total: EUR(total),
           orderNo,
           bank: {
@@ -796,7 +843,7 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
 
       try{ await navigator.clipboard.writeText(prefill); }catch(e){}
       sessionStorage.removeItem('cartItems');
-      renderCart(); updateCartTotal(); updateCount(); updatePrepayVisibility();
+      renderCart(); updateCartTotals(); updateCount(); updatePrepayVisibility();
     }
 
     document.getElementById('prepayClose').addEventListener('click', function(){
@@ -862,7 +909,7 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
           priceEl.className = 'price';
           priceEl.innerHTML = `
             <span class="total">${EUR(price)}</span>
-            <span class="sub">${unitStr ? `${unitStr} · ` : ''}inkl. MwSt., <a href="versand.html">zzgl. Versand</a></span>
+            <span class="sub">${unitStr ? `${unitStr} · ` : ''}inkl. MwSt., zzgl. Versand (${shippingInfoText()})</span>
           `;
           card.querySelector('.desc').insertAdjacentElement('afterend', priceEl);
           card.classList.add('has-price');
@@ -911,93 +958,90 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
     if(loadCart().length > 0){ openCart(); }
   </script>
 
-  <script src="https://www.paypal.com/sdk/js?client-id=AV5VSF_wvI4eyzAN94z0407RphkMdDk5hf6C43qxVXZxdsKa2yz9dhpox_pgBWPVUSnxM8op7fvH2QWS&currency=EUR&intent=CAPTURE&locale=de_DE" data-namespace="paypal_sdk"></script>
+  <!-- PayPal JavaScript SDK: Live Client ID, intent=capture, nur Buttons-Komponente -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AcGKJYHq58zlPQNptEbjiMIiF33lR-LP-zx5WeGeT_5H4tV6JhI0kDm78ZVynIUbi9HBrJZTkAOJRk8T&currency=EUR&intent=capture&components=buttons&locale=de_DE" data-namespace="paypal_sdk"></script>
+
   <script>
   (function(){
     function readCart(){ try { return JSON.parse(sessionStorage.getItem('cartItems') || '[]'); } catch { return []; } }
     function countMap(arr){ const m={}; for(const id of arr){ m[id]=(m[id]||0)+1; } return m; }
     function onlyPayable(ids){ return ids.length>0 && ids.every(id => window.PAYABLE_PRICES && window.PAYABLE_PRICES[id] !== undefined); }
-    function totalEUR(ids){ const m=countMap(ids); let t=0; for(const [id,q] of Object.entries(m)){ t+=(window.PAYABLE_PRICES[id]||0)*q; } return Number(t.toFixed(2)); }
+    function subtotalEUR(ids){ const m=countMap(ids); let t=0; for(const [id,q] of Object.entries(m)){ t+=(window.PAYABLE_PRICES[id]||0)*q; } return Number(t.toFixed(2)); }
 
-    function itemsForPayload(ids){
+    // für Payload
+    window.itemsForPayload = function(ids){
       const m = countMap(ids);
       const out = [];
       for(const [id, qty] of Object.entries(m)){
         const p = (window.PRODUCTS || []).find(x => x.cartId === id);
-        out.push({
-          title: p ? (p.displayName || p.title) : id,
-          qty: qty,
-          price: String((window.PAYABLE_PRICES || {})[id] ?? '')
-        });
+        out.push({ title: p ? (p.displayName || p.title) : id, qty, price: String((window.PAYABLE_PRICES || {})[id] ?? '') });
       }
       return out;
-    }
+    };
 
     function buildButtonConfig(items, hintEl){
+      function orderItems(){
+        const arr = window.itemsForPayload(items) || [];
+        return arr.map(i => ({
+          name: String(i.title || '').slice(0,127),
+          quantity: String(i.qty || 1),
+          unit_amount: { currency_code:'EUR', value: Number(i.price || 0).toFixed(2) }
+        }));
+      }
       return {
         style: { layout:'vertical', shape:'rect', label:'paypal' },
         createOrder: function(data, actions){
-          var amount = totalEUR(items);
+          var sub = subtotalEUR(items);
+          var ship = (typeof window.shippingFee === 'function') ? window.shippingFee(sub) : (SHIPPING?.flat||0);
+          var itms = orderItems();
+          var itemsTotal = itms.reduce((s,it)=> s + parseFloat(it.unit_amount.value) * parseInt(it.quantity,10), 0).toFixed(2);
+
           return actions.order.create({
-            intent: 'CAPTURE',
-            purchase_units: [{ amount: { currency_code:'EUR', value: amount.toFixed(2) } }]
+            purchase_units: [{
+              amount: {
+                currency_code:'EUR',
+                value: (sub + ship).toFixed(2),
+                breakdown: {
+                  item_total: { currency_code:'EUR', value: Number(itemsTotal).toFixed(2) },
+                  shipping:   { currency_code:'EUR', value: Number(ship).toFixed(2) },
+                  tax_total:  { currency_code:'EUR', value: '0.00' }
+                }
+              },
+              items: itms
+            }],
+            application_context: { shipping_preference:'NO_SHIPPING', user_action:'PAY_NOW' }
           });
         },
         onApprove: async function(data, actions){
           const details = await actions.order.capture();
-
           try{
             const unit = (details.purchase_units && details.purchase_units[0]) || {};
-            const shipping = (unit.shipping && unit.shipping.address) || {};
-            const buyerName = (unit.shipping && unit.shipping.name && unit.shipping.name.full_name) || '';
             const buyerEmail = (details.payer && details.payer.email_address) || '';
-
             const payload = {
-              type: 'order',
-              order: {
-                id: details.id,
-                amount: unit.amount && unit.amount.value || '',
-                currency: unit.amount && unit.amount.currency_code || 'EUR',
-                status: details.status || ''
-              },
-              buyer: { name: buyerName, email: buyerEmail },
-              shipping: {
-                name: buyerName,
-                line1: shipping.address_line_1 || '',
-                line2: shipping.address_line_2 || '',
-                postal_code: shipping.postal_code || '',
-                city: shipping.admin_area_2 || '',
-                country_code: shipping.country_code || 'DE'
-              },
-              items: itemsForPayload(items)
+              type:'order',
+              order:{ id:details.id, amount:unit.amount?.value || '', currency:unit.amount?.currency_code || 'EUR', status:details.status || '' },
+              buyer:{ name:(details.payer && details.payer.name && (details.payer.name.given_name + ' ' + details.payer.name.surname)) || '', email:buyerEmail },
+              shipping_amount: unit.amount?.breakdown?.shipping?.value || '0.00',
+              items: window.itemsForPayload(items)
             };
-
-            fetch(window.APPSCRIPT_ENDPOINT || '', {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
+            fetch(window.APPSCRIPT_ENDPOINT || '', { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
           }catch(e){}
-
           sessionStorage.removeItem('cartItems');
-          if(hintEl) hintEl.textContent = 'Zahlung erfolgreich. Die Bestellbestätigung wurde per E-Mail versendet.';
+          if(hintEl) hintEl.textContent = 'Zahlung erfolgreich. Die Bestellbestätigung wurde per E Mail versendet.';
           try{ window.dispatchEvent(new Event('storage')); }catch(e){}
         },
-        onCancel: function(){
-          if(hintEl) hintEl.textContent = 'Zahlung abgebrochen.';
-        },
-        onError: function(err){
-          console.error(err);
-          if(hintEl) hintEl.textContent = 'PayPal Fehler. Bitte später erneut versuchen.';
-        }
+        onCancel: function(){ if(hintEl) hintEl.textContent = 'Zahlung abgebrochen.'; },
+        onError: function(err){ console.error(err); if(hintEl) hintEl.textContent = 'PayPal Fehler. Bitte später erneut versuchen.'; }
       };
     }
 
+    // Hilfsfunktionen global bereitstellen
+    window.shippingFee = function(sub){ const s=SHIPPING||{}; if(s.freeFrom!=null && sub>=s.freeFrom) return 0; return Number(s.flat||0); };
+
     function mountPayPal(){
-      var area  = document.getElementById('paypalArea');
-      var card  = document.getElementById('cardArea');
-      var hint  = document.getElementById('paypalHint');
+      var area = document.getElementById('paypalArea');
+      var card = document.getElementById('cardArea');
+      var hint = document.getElementById('paypalHint');
       if(!area) return;
 
       area.innerHTML = '';
@@ -1006,7 +1050,7 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
 
       var items = readCart();
       if(!onlyPayable(items)){
-        if(hint && items.length>0) hint.textContent = 'Zahlarten erscheinen automatisch, sobald nur online zahlbare Produkte im Warenkorb liegen.';
+        if(hint && items.length>0) hint.textContent = 'Zahlarten erscheinen automatisch, sobald nur online bepreiste Produkte im Warenkorb liegen.';
         return;
       }
 
@@ -1018,15 +1062,16 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
 
       var cfg = buildButtonConfig(items, hint);
 
-      pp.Buttons(cfg).render('#paypalArea');
+      // PayPal Button
+      var paypalCfg = Object.assign({}, cfg, { fundingSource: pp.FUNDING.PAYPAL, style:{ layout:'vertical', shape:'rect', label:'paypal' } });
+      pp.Buttons(paypalCfg).render('#paypalArea');
 
+      // Karten Button darunter (falls erlaubt)
       try{
         if(pp.FUNDING && pp.FUNDING.CARD && card){
-          var cardCfg = Object.assign({}, cfg, { style: { layout:'vertical', shape:'rect', label:'pay' }, fundingSource: pp.FUNDING.CARD });
+          var cardCfg = Object.assign({}, cfg, { fundingSource: pp.FUNDING.CARD, style:{ layout:'vertical', shape:'rect', label:'pay' } });
           var cardButtons = pp.Buttons(cardCfg);
-          if(cardButtons.isEligible()){
-            cardButtons.render('#cardArea');
-          }
+          if(cardButtons.isEligible()) cardButtons.render('#cardArea');
         }
       }catch(e){}
     }
@@ -1038,7 +1083,6 @@ Verwendungszweck: ${BANK.purposePrefix} ${orderNo}`;
       }
     }catch(e){}
     document.addEventListener('DOMContentLoaded', function(){ try{ mountPayPal(); }catch(e){} });
-    setInterval(function(){ try{ mountPayPal(); }catch(e){} }, 1500);
   })();
   </script>
 
